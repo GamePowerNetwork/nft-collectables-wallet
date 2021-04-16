@@ -3,8 +3,6 @@ import { Text } from 'react-native'
 import styled from 'styled-components/native'
 import globalStyles from '../../extra/styles/global'
 
-import {AppScreens} from '../../navigation/DrawerNavigator'
-
 
 const Market = ({navigation}) => {
     return (

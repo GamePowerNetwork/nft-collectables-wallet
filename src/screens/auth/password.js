@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import styled from 'styled-components/native'
 
-import {AuthScreens} from '../../navigation/AuthNavigator'
+import {AuthScreens} from '../../extra/constants'
 
 import Text from '../../components/Text'
 import Button from '../../components/Button';

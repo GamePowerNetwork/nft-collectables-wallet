@@ -1,19 +1,11 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer'
-
+import {MainScreens} from '../../extra/constants'
 import {Home, Collectibles, Scan, Market, Settings, Sidebar} from '../../screens/main'
-
-export const MainScreens = {
-    Home: 'Home',
-    Collectibles: 'Collectibles',
-    Scan: 'Scan',
-    Marketplace: 'Marketplace',
-    Settings: 'Settings'
-}
 
 const {Navigator, Screen} = createDrawerNavigator();
 
-const DrawerNavigator = () => {
+export const DrawerNavigator = () => {
     return (
         <Navigator 
             drawerContent={(props) => <Sidebar {...props} />}
@@ -27,5 +19,3 @@ const DrawerNavigator = () => {
         </Navigator>
     )
 }
-
-export default DrawerNavigator;

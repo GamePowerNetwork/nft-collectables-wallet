@@ -3,18 +3,20 @@ import { Text } from 'react-native'
 import styled from 'styled-components/native'
 import globalStyles from '../../extra/styles/global'
 
-import {AuthScreens} from '../../navigation/AuthNavigator'
+import {AuthScreens} from '../../extra/constants'
 
 import { Button } from 'react-native-elements'
+import { View } from 'react-native'
 
 
 const Welcome = ({navigation}) => {
     return (
         <SafeArea>
+            <BackgroundImage source={require('../../../assets/Background.png')}/>
             <Container>
+                <View style={{flex: 1}}></View>
                 <Logo>
-                    <Image source={require('../../../assets/TokenLogo.png')}/>
-                    <Text style={globalStyles.titleText}>NFT Wallet</Text>
+                    <Image source={require('../../../assets/LootBoxLogo-SwordTagLine.png')}/>
                 </Logo>
 
                 <CreateWalletButton 
@@ -38,7 +40,7 @@ export default Welcome;
 /* Styles */
 const SafeArea = styled.SafeAreaView`
     flex: 1;
-    background-color: #2F254F;
+    background-color: silver;
 `;
 
 const Container = styled.View`
@@ -48,19 +50,19 @@ const Container = styled.View`
 `;
 
 const Logo = styled.View`
-    flex: 1;
+    flex: 4;
     align-items: center;
     justify-content: center;
 `
 
 const CreateWalletButton = styled(Button).attrs({
     titleStyle: {
-        color: "#8022d9",
+        color: "#ffffff",
         fontWeight: "600",
         fontSize: 16
     },
     buttonStyle: {
-        backgroundColor: "#ffffff",
+        backgroundColor: "#2c2c5c",
         height: 50,
         borderRadius: 6
     }
@@ -68,20 +70,32 @@ const CreateWalletButton = styled(Button).attrs({
 
 const RestoreWalletButton = styled(Button).attrs({
     titleStyle: {
-        color: "#ffffff",
+        color: "#2c2c5c",
         fontWeight: "600",
         fontSize: 16
     },
     buttonStyle: {
         height: 60
-    }
+    },
 })`
     margin-top: 16px;
 `
 
-const Image = styled.Image`
-    width: 150px;
-    height: 170px;
+const Image = styled.Image.attrs({
+    resizeMode: 'contain'
+})`
+    width: 200px;
+    height: 350px;
+`
+
+const BackgroundImage = styled.Image.attrs({
+    resizeMode: 'stretch'
+})`
+    position: absolute;
+    width: 100%;
+    height: 120%;
+    bottom: 0;
+    top: 0;
 `
 
 const Main = styled.View`

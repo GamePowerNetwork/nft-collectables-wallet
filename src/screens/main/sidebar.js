@@ -9,8 +9,8 @@ const Sidebar = (props) => {
         <SafeArea>
             <View style={styles.header}>
                 <Logo>
-                    <Image source={require('../../../assets/TokenLogo.png')}/>
-                    <Text style={globalStyles.largeText}>NFT Wallet</Text>
+                    <Image style={{width: '50%', resizeMode: 'contain'}} source={require('../../../assets/LootBoxLogo-BoxOpen.png')}/>
+                    <Image style={{width: '60%', resizeMode: 'contain'}} source={require('../../../assets/LootBoxLogo-TextOnly.png')}/>
                 </Logo>
             </View>
             <DrawerItemList {...props} />
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
 
 const SafeArea = styled.SafeAreaView`
     flex: 1;
+    background-color: lightgray;
 `;
 
 const Logo = styled.View`

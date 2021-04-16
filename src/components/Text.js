@@ -12,12 +12,23 @@ const Text = styled.Text`
     color: ${props => props.color ?? "#414959"};
     margin: ${props => props.margin ?? 0};
     padding: ${props => props.padding ?? 0};
-    ${({title, large, medium, small, tiny}) => {
+    ${({header, title, large, medium, small, tiny}) => {
         switch (true) {
+            case header:
+                return `
+                font-size: 40px;
+                font-family: ExtraBold
+                `
             case title:
-                return `font-size: 32px;`
+                return `
+                font-size: 32px;
+                font-family: ExtraBold;
+                `
             case large:
-                return `font-size: 24px;`
+                return `
+                font-size: 24px;
+                font-family: ExtraBold
+                `
             case medium:
                 return `font-size: 16px;`
             case small:
