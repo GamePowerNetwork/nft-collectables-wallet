@@ -23,7 +23,7 @@ export default function App() {
 
   return (
     <Provider store={configureStore(services)}>
-      <StatusBar barStyle="dark-content" hidden />
+      <StatusBar barStyle="light-content" />
       <MainNav/>
       <WebViewService />
     </Provider>

@@ -1,32 +1,47 @@
 {
   "expo": {
-    "name": "nft-collectibles-wallet",
-    "slug": "nft-collectibles-wallet",
-    "version": "1.0.0",
+    "name": "LootBox",
+    "slug": "lootbox-wallet",
+    "version": "0.0.1",
+    "privacy": "unlisted",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "scheme": "lootboxwallet",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 30000
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "buildNumber": "0.0.1",
+      "bundleIdentifier": "network.gamepower.LootBox",
+      "usesAppleSignIn": true,
+      "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true
+      },
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.571002288984-t4tv9boccu8vhdpr8se7khrf1vctrq5b"
+        }
+      }
     },
     "android": {
+      "package": "network.gamepower.LootBox",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
+    "facebookScheme": "fb1075972036247109",
+    "facebookAppId": "1075972036247109",
+    "facebookDisplayName": "LootBox Wallet"
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import globalStyles from '../../extra/styles/global'
+import * as constants from '../../extra/constants'
 import { View, Text, StyleSheet, ScrollView, ImageBackground} from 'react-native'
 import { DrawerNavigatorItems, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer'
 
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
 
 const SafeArea = styled.SafeAreaView`
     flex: 1;
-    background-color: lightgray;
+    background-color: ${constants.BACKGROUND_COLOR};
 `;
 
 const Logo = styled.View`

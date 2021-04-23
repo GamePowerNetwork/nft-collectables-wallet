@@ -1,5 +1,11 @@
+import auth from './auth.middleware'
+import nft from './nft.middleware'
 import keyring from './keyring.middleware'
+import provider from './provider.middleware'
 
 export default [
-    ...keyring
+    ...auth,
+    ...nft,
+    ...keyring,
+    ...provider
 ]

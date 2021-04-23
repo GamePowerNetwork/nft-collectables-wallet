@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {useSelector} from 'react-redux'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 
 import {AuthNavigator} from './AuthNavigator'
@@ -13,11 +14,12 @@ const baseTheme = {
   };
 
 const MainNav = () => {
-    const [isWalletCreated, setIsWalletCreated] = useState(true)
+    const [isWalletCreated, setIsWalletCreated] = useState(false)
+    const { token } = useSelector((state) => state.authReducer)
 
     return (
         <NavigationContainer theme={baseTheme}>
-            {isWalletCreated ? <DrawerNavigator /> : <AuthNavigator />}
+            {(token != null) ? <DrawerNavigator /> : <AuthNavigator />}
         </NavigationContainer>
     )
 }

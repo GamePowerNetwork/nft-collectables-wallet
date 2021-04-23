@@ -1,0 +1,6 @@
+export const APPLE_LOGIN                 = "auth:APPLE_LOGIN"
+export const APPLE_LOGIN_SUCCESS         = "auth:APPLE_LOGIN_SUCCESS"
+export const FACEBOOK_LOGIN              = "auth:FACEBOOK_LOGIN"
+export const FACEBOOK_LOGIN_SUCCESS      = "auth:FACEBOOK_LOGIN_SUCCESS"
+export const GOOGLE_LOGIN                = "auth:GOOGLE_LOGIN"
+export const GOOGLE_LOGIN_SUCCESS        = "auth:GOOGLE_LOGIN_SUCCESS"
