@@ -12,8 +12,8 @@ const ITEM_WIDTH = 320
 const ITEM_HEIGHT = 360
 
 const series = [
-    { name: 'Video Games Plus', key: "1"},
-    { name: 'Michael Tyrone Huntington', key: "2"},
+    { name: 'Dragons', key: "1"},
+    { name: 'Space Ships', key: "2"},
     { name: 'Cyber Deck', key: "3"},
     { name: 'Weapons', key: "4"},
     { name: 'Rick & Morty', key: "5"},
