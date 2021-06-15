@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useSelector} from 'react-redux'
+import { Alert } from 'react-native'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 
 import {AuthNavigator} from './AuthNavigator'
-import {DrawerNavigator} from './DrawerNavigator'
+import {TabNavigator} from './TabNavigator'
 
 const baseTheme = {
     ...DefaultTheme,
@@ -15,11 +16,17 @@ const baseTheme = {
 
 const MainNav = () => {
     const [isWalletCreated, setIsWalletCreated] = useState(false)
-    const { token } = useSelector((state) => state.authReducer)
+    const { token, error } = useSelector((state) => state.authReducer)
+
+    useEffect(() => {
+        if(error !== null) {
+            Alert.alert("Error", error.message, [{text: 'OK'}])
+        }
+    }, [error])
 
     return (
         <NavigationContainer theme={baseTheme}>
-            {(token != null) ? <DrawerNavigator /> : <AuthNavigator />}
+            {(token != null) ? <TabNavigator /> : <AuthNavigator />}
         </NavigationContainer>
     )
 }

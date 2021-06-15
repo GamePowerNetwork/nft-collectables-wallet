@@ -1,17 +1,16 @@
-import React, {useState, useEffect} from 'react'
-import { FlatList, StyleSheet } from 'react-native'
-import {useSelector, useDispatch} from 'react-redux'
+import React, {useState, useEffect, useCallback} from 'react'
+import { StyleSheet } from 'react-native'
+import {useDispatch} from 'react-redux'
 
 import styled from 'styled-components/native'
 import globalStyles from '../../../extra/styles/global'
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
 import * as constants from '../../../extra/constants'
+import useEventListener from '../../../extra/util/useEventListener'
 
-import {Text, Button, BaseContainer} from '../../../components'
+import {Text, BaseContainer} from '../../../components'
 import { BarCodeScanner } from 'expo-barcode-scanner'
-import { claimNFT } from '../../../redux/actions/nft.actions'
 
 
 
@@ -19,6 +18,7 @@ const Scan = ({navigation}) => {
     const dispatch = useDispatch()
     const [hasPermission, setHasPermission] = useState(null)
     const [scanned, setScanned] = useState(false)
+    const [cameraEnabled, setCameraEnabled] = useState(false)
 
     useEffect(() => {
         (async () => {
@@ -27,9 +27,26 @@ const Scan = ({navigation}) => {
         })()
     }, [dispatch])
 
-    const handleBarCodeScanned = ({ data }) => {
+    const blurHandler = useCallback(
+        () => {
+            setCameraEnabled(false)
+        }
+    )
+
+    const focusHandler = useCallback(
+        () => {
+            setScanned(false)
+            setCameraEnabled(true)
+        }
+    )
+
+    // Events
+    useEventListener('blur', blurHandler, navigation)
+    useEventListener('focus', focusHandler, navigation)
+
+    const handleQRScanned = ({ data }) => {
         setScanned(true)
-        dispatch(claimNFT(data));
+        navigation.navigate(constants.ScannerScreens.Review, {claim:data})
     };
 
     const RequestView = () => {
@@ -52,7 +69,7 @@ const Scan = ({navigation}) => {
         return (
             <BarCodeScanner
                 barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                onBarCodeScanned={scanned ? undefined : handleQRScanned}
                 style={StyleSheet.absoluteFillObject}
             />
         )
@@ -62,7 +79,7 @@ const Scan = ({navigation}) => {
     return (
         <BaseContainer 
             navigationMenuHandler={() => navigation.openDrawer()} 
-            navigationTitle="QR Scanner"
+            navigationTitle="Scan Loot"
             navigationLeftIconType="menu"
             navigationIcon={require('../../../../assets/LootBoxLogo-BoxWhite.png')}>
 
@@ -70,15 +87,15 @@ const Scan = ({navigation}) => {
 
             {(hasPermission === false) && NoAccessView() }
 
-            {(hasPermission === true && scanned === false) && ScannerView() }
+            {(hasPermission === true && cameraEnabled) && ScannerView() }
 
-            {(hasPermission === true && scanned === false) && 
+            {(hasPermission === true) && 
                 <ScanHelperView>
                   <Ionicons name="ios-scan-outline" size={400} color={constants.BACKGROUND_LIGHT} />
                 </ScanHelperView>
             }
 
-            {(hasPermission === true && scanned === false) && 
+            {(hasPermission === true) && 
                 <InstructionView>
                     <Text center color="white">Point your camera towards a LootBox QR Code</Text>
                 </InstructionView>

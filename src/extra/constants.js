@@ -5,23 +5,24 @@ export const AuthScreens = {
     Login: 'Login',
     CreatePassword: 'CreatePassword',
     CreatePhrase: 'CreatePhrase',
+    Guide: 'Guide',
 }
 
 export const MainScreens = {
-    Home: 'Home',
+    Drops: 'Drops',
     Scan: 'Scan',
     Marketplace: 'Marketplace',
-    Settings: 'Settings'
+    Settings: 'Settings',
 }
 
 export const CollectiblesScreens = {
     Collectibles: 'Collectibles',
-    Series: 'Series'
+    Series: 'Series',
 }
 
 export const ScannerScreens = {
     Scan: 'Scan',
-    Review: 'Review'
+    Review: 'Review',
 }
 
 // UI

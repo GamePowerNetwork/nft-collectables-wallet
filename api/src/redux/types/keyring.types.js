@@ -1,2 +1,2 @@
-export const GENERATE_PHRASE = "GENERATE_PHRASE"
-export const GENERATE_PHRASE_SUCCESS = "GENERATE_PHRASE_SUCCESS"
+export const GENERATE_PHRASE                     = "keyring:GENERATE_PHRASE"
+export const GENERATE_PHRASE_SUCCESS             = "keyring:GENERATE_PHRASE_SUCCESS"

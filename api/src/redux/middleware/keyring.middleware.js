@@ -9,7 +9,7 @@ const generatePhraseFlow = ({api}) => ({getState, dispatch}) => next => async (a
         try {
           const response = api.keyring.generatePhrase()
           const result = {
-            type: 'GENERATE_PHRASE_SUCCESS',
+            type: types.GENERATE_PHRASE_SUCCESS,
             payload: response
           }
           dispatch(actions.sendResults(result))

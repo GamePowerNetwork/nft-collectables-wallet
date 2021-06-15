@@ -6,6 +6,7 @@ function Api() {
 
   useEffect(() => {
     window.addEventListener("message", message => {
+      if (message === undefined || message.data.type === undefined) return
       dispatch(message.data)
     })
   }, [dispatch])

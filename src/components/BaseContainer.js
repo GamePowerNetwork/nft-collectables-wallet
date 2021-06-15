@@ -14,8 +14,8 @@ const BaseContainer = ({...props}) => {
                 <NavigationView 
                     onPress={props.navigationMenuHandler} 
                     title={props.navigationTitle} 
-                    leftIconName={(props.navigationLeftIconType == 'back') ? constants.BACK_ICON : constants.MENU_ICON}
-                    leftIconSize={(props.navigationLeftIconType == 'back') ? 24 : 30}
+                    leftIconName={(props.navigationLeftIconType == 'back') ? constants.BACK_ICON : (props.navigationLeftIconType == 'back') ? constants.MENU_ICON : null}
+                    leftIconSize={(props.navigationLeftIconType == 'back') ? 20 : (props.navigationLeftIconType == 'back') ? 30 : 0}
                     icon={props.navigationIcon} 
                 />
                 

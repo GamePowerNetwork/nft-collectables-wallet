@@ -1,42 +1,39 @@
 import { 
   APPLE_LOGIN,
-  APPLE_LOGIN_SUCCESS,
   FACEBOOK_LOGIN, 
-  FACEBOOK_LOGIN_SUCCESS, 
-  GOOGLE_LOGIN, 
-  GOOGLE_LOGIN_SUCCESS 
+  GOOGLE_LOGIN,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT,
+  TEST_LOGIN
 } from '../types';
 
+export const loginSuccess = (payload) => {
+  return {
+    type: LOGIN_SUCCESS,
+    payload
+  }
+}
+
+export const loginFailure = (error) => {
+  return {
+    type: LOGIN_FAILURE,
+    error
+  }
+}
 
 export const fbLogin = () => {
   return { type: FACEBOOK_LOGIN }
-}
-
-export const fbLoginSuccess = (payload) => {
-  return {
-    type: FACEBOOK_LOGIN_SUCCESS,
-    payload
-  }
 }
 
 export const googleLogin = () => {
   return { type: GOOGLE_LOGIN }
 }
 
-export const googleLoginSuccess = (payload) => {
-  return {
-    type: GOOGLE_LOGIN_SUCCESS,
-    payload
-  }
-}
-
 export const appleLogin = () => {
   return { type: APPLE_LOGIN }
 }
 
-export const appleLoginSuccess = (payload) => {
-  return {
-    type: APPLE_LOGIN_SUCCESS,
-    payload
-  }
+export const logout = () => {
+  return { type: LOGOUT }
 }

@@ -2,6 +2,7 @@ import {
   CLAIM_NFT,
   CLAIM_NFT_SUCCESS,
   CLAIM_NFT_FAILURE,
+  CLAIM_PENDING_NFT,
   FETCH_COLLECTIBLES, 
   FETCH_COLLECTIBLES_FAILURE, 
   FETCH_COLLECTIBLES_SUCCESS, 
@@ -33,12 +34,15 @@ export const fetchSeriesFailure = (error) => {
 }
 
 // Claim
-export const claimNFT = (claimData) => {
-  return { type: CLAIM_NFT, payload: claimData};
+export const claimNFT = (claimData, isPending = false) => {
+  return { type: CLAIM_NFT, payload: claimData, isPending};
 }
 export const claimNFTSuccess = (results) => {
 return { type: CLAIM_NFT_SUCCESS, payload: results };
 }
 export const claimNFTFailure = (error) => {
   return { type: CLAIM_NFT_FAILURE, payload: error };
+}
+export const claimPendingNFT = () => {
+  return { type: CLAIM_PENDING_NFT }
 }

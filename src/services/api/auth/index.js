@@ -1,6 +1,10 @@
+import firebase from "firebase/app";
+import "firebase/auth";
+import * as Crypto from "expo-crypto";
 import * as Facebook from 'expo-facebook'
 import * as Google from 'expo-google-app-auth'
 import * as AppleAuthentication from 'expo-apple-authentication'
+import {Alert} from 'react-native'
 
 const GOOGLE_ANDROID_CLIENT_ID = "571002288984-kc2miucnquupq606p7qjcsch95vie0j9.apps.googleusercontent.com"
 const GOOGLE_IOS_CLIENT_ID = "571002288984-t4tv9boccu8vhdpr8se7khrf1vctrq5b.apps.googleusercontent.com"
@@ -12,10 +16,22 @@ export default {
 
       const { token, type } = await Facebook.logInWithReadPermissionsAsync(
         {
-          permissions: ['public_profile']
+          permissions: ['public_profile', 'email']
         }
       )
-  
+
+      // Build Firebase credential with the Facebook access token.
+      const credential = firebase.auth.FacebookAuthProvider.credential(token)
+
+      await firebase
+        .auth()
+        .signInWithCredential(credential)
+
+      //console.log(firebaseError);
+
+      //return firebaseError;
+      
+      /*
       // GET USER DATA FROM FB API
       const response = await fetch(
         `https://graph.facebook.com/me?access_token=${token}`
@@ -34,42 +50,72 @@ export default {
       }
   
       return { type, token, user: userObject }
+      */
+
+      return true
     } catch (e) {
-      return { error: e }
+      throw(e)
     }
   },
 
   googleLogin: async () => {
     try {
-      const { type, accessToken, user } = await Google.logInAsync({
+      const { type, idToken, accessToken, user } = await Google.logInAsync({
         androidStandaloneAppClientId: GOOGLE_ANDROID_CLIENT_ID,
         iosStandaloneAppClientId: GOOGLE_IOS_CLIENT_ID,
       })
+
+      const credential = firebase.auth.GoogleAuthProvider.credential(idToken, accessToken)
   
-      return { type, token: accessToken, user }
+      await firebase
+        .auth()
+        .signInWithCredential(credential)
+
+      return true
     } catch (e) {
-      return { error: e }
+      throw(e)
     }
   },
 
   appleLogin: async () => {
     try {
+      const csrf = Math.random().toString(36).substring(2, 15)
+      const nonce = Math.random().toString(36).substring(2, 10)
+      const hashedNonce = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, nonce)
 
-      const credential = await AppleAuthentication.signInAsync({
+      const appleCredential = await AppleAuthentication.signInAsync({
         requestedScopes: [
           AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
           AppleAuthentication.AppleAuthenticationScope.EMAIL
         ],
+        state: csrf,
+        nonce: hashedNonce
       })
-      return credential;
+
+      const { identityToken, email, state } = appleCredential;
+      const provider = new firebase.auth.OAuthProvider("apple.com")
+      const credential = provider.credential({
+        idToken: identityToken,
+        rawNonce: nonce // nonce value from above
+      })
+      
+      await firebase
+        .auth()
+        .signInWithCredential(credential)
+
+      return true
 
     } catch (e) {
-      if (e.code === 'ERR_CANCELED') {
-
-      } else {
-        // handle other errors
-      }
+      throw(e)
     }
+  },
+
+  logout: async () => {
+    firebase.auth().signOut().then(() => {
+      return true
+    }).catch((error) => {
+      throw(error)
+    });
   }
 
 }

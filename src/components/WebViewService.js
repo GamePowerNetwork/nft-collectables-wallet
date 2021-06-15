@@ -17,6 +17,8 @@ const WebViewService = () => {
   }, [])
 
   useEffect(() => {
+    if(request === undefined) return
+
     const clientResponseCode = `
       window.postMessage(${JSON.stringify(request)}, "*");
       true;
@@ -29,12 +31,12 @@ const WebViewService = () => {
 
   const getAPIWebView = async() => {
     const [{ localUri }] = await Asset.loadAsync(require('../../api/build/index.html'))
-    const fileContents = await FileSystem.readAsStringAsync(localUri);
-    setHtml(fileContents);
+    const fileContents = await FileSystem.readAsStringAsync(localUri)
+    setHtml(fileContents)
   }
 
   const onSDKMessage = (event) => {
-    const { data } = event.nativeEvent;
+    const { data } = event.nativeEvent
 
     try {
       const result = JSON.parse(data)

@@ -1,6 +1,6 @@
-import Home from './home'
+import Drops from './drops'
 import Market from './market'
 import Settings from './settings'
 import Sidebar from './sidebar'
 
-export {Home, Market, Settings, Sidebar}
+export {Drops, Market, Settings, Sidebar}

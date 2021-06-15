@@ -1,8 +1,9 @@
-import { PHRASE_REQUEST, PHRASE_RESULT } from "../types"
+import { API_REQUEST, API_RESULT } from "../types"
 
-export const phraseResult = (phrase) => {
-  return { type: PHRASE_RESULT, payload: phrase };
+
+export const apiResult = (result) => {
+  return { type: API_RESULT, payload: result };
 }
-export const phraseRequest = (action) => {
-    return { type: PHRASE_REQUEST, payload: action };
+export const apiRequest = (action) => {
+    return { type: API_REQUEST, payload: action };
 }

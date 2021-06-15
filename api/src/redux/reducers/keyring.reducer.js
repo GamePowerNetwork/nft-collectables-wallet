@@ -1,9 +1,9 @@
-import { GENERATE_PHRASE } from '../types';
+import { GENERATE_PHRASE } from '../types'
 
 
 const initialState = {
   phrase: undefined
-};
+}
 
 export function keyringReducer(state = initialState, action) {
   switch (action.type) {
@@ -16,4 +16,4 @@ export function keyringReducer(state = initialState, action) {
     default:
       return state
   }
-};
+}

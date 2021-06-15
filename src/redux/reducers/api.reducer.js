@@ -1,4 +1,4 @@
-import { PHRASE_REQUEST } from '../types';
+import { API_REQUEST } from '../types';
 
 
 const initialState = {
@@ -7,7 +7,7 @@ const initialState = {
 
 export function apiReducer(state = initialState, action) {
   switch (action.type) {
-    case PHRASE_REQUEST: {
+    case API_REQUEST: {
       return {
         ...state,
         request: action.payload
