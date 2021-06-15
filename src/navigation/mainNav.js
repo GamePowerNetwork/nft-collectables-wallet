@@ -26,7 +26,7 @@ const MainNav = () => {
 
     return (
         <NavigationContainer theme={baseTheme}>
-            {(token != null) ? <TabNavigator /> : <AuthNavigator />}
+            {(token !== null) ? <TabNavigator /> : <AuthNavigator />}
         </NavigationContainer>
     )
 }

@@ -6218,6 +6218,32 @@ react-native-svg@12.1.0:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
 
+react-native-unimodules@~0.13.3:
+  version "0.13.3"
+  resolved "https://registry.yarnpkg.com/react-native-unimodules/-/react-native-unimodules-0.13.3.tgz#544a3840683967ca6a2e8b9841d0524236eb6288"
+  integrity sha512-fjbNbAcvJHF8Ywqe77oveRW1WfaAKCQGV4a3Fxgpai17oNHq1LFwwKw0crFo0k7Njm5u7kCMVNbm9ZILNBfABQ==
+  dependencies:
+    "@unimodules/core" "~7.1.0"
+    "@unimodules/react-native-adapter" "~6.2.2"
+    chalk "^2.4.2"
+    expo-asset "~8.3.1"
+    expo-constants "~10.1.3"
+    expo-file-system "~11.0.2"
+    expo-image-loader "~2.1.1"
+    expo-permissions "~12.0.1"
+    find-up "~5.0.0"
+    unimodules-app-loader "~2.1.0"
+    unimodules-barcode-scanner-interface "~6.1.0"
+    unimodules-camera-interface "~6.1.0"
+    unimodules-constants-interface "~6.1.0"
+    unimodules-face-detector-interface "~6.1.0"
+    unimodules-file-system-interface "~6.1.0"
+    unimodules-font-interface "~6.1.0"
+    unimodules-image-loader-interface "~6.1.0"
+    unimodules-permissions-interface "~6.1.0"
+    unimodules-sensors-interface "~6.1.0"
+    unimodules-task-manager-interface "~6.1.0"
+
 react-native-web@~0.13.12:
   version "0.13.18"
   resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.13.18.tgz#964f058a16521a3b9a31b091415edfef5b6ef305"
