@@ -1,10 +1,9 @@
-import firebase from "firebase/app";
-import "firebase/auth";
-import * as Crypto from "expo-crypto";
+import firebase from "firebase/app"
+import "firebase/auth"
+import * as Crypto from "expo-crypto"
 import * as Facebook from 'expo-facebook'
 import * as Google from 'expo-google-app-auth'
 import * as AppleAuthentication from 'expo-apple-authentication'
-import {Alert} from 'react-native'
 
 const GOOGLE_ANDROID_CLIENT_ID = "571002288984-kc2miucnquupq606p7qjcsch95vie0j9.apps.googleusercontent.com"
 const GOOGLE_IOS_CLIENT_ID = "571002288984-t4tv9boccu8vhdpr8se7khrf1vctrq5b.apps.googleusercontent.com"
