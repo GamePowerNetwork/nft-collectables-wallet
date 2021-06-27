@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gamepower_wallet/common/components/CustomPageRoute.dart';
-import 'package:gamepower_wallet/pages/home_page/home_page.dart';
+import 'package:gamepower_wallet/pages/shell/shell.page.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 class OnBoardingPage extends StatefulWidget {
@@ -14,7 +14,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   void _onIntroEnd(context) {
     Navigator.of(context).push(
-      CustomPageRoute(builder: (_) => HomeScreen()),
+      CustomPageRoute(builder: (_) => ShellPage()),
     );
   }
 

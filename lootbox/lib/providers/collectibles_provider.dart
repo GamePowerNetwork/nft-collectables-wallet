@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gamepower_wallet/models/Collectible.dart';
+import 'package:gamepower_wallet/common/models/Collectible.dart';
 
 class Collectibles extends ChangeNotifier {
   List<Collectible> _collectibles = [];
