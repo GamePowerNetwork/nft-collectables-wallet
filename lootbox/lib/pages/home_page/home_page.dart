@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gamepower_wallet/models/Collection.dart';
 import 'package:gamepower_wallet/models/Network.dart';
+import 'package:gamepower_wallet/pages/loot_drop/loot_drop.page.dart';
+import 'package:gamepower_wallet/pages/market/market.page.dart';
+import 'package:gamepower_wallet/pages/settings/settings.page.dart';
 import 'package:gamepower_wallet/providers/collections_provider.dart';
 import 'package:gamepower_wallet/providers/network_provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -13,20 +16,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-
   void initState() {
     super.initState();
 
     () async {
       await Future.delayed(Duration.zero);
-      context.read<NetworkProvider>().selectNetwork(selectedNetwork);   
+      context.read<NetworkProvider>().selectNetwork(selectedNetwork);
       context.read<Collections>().setCollections(collections);
     }();
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems(BuildContext context) {
     return [
-            PersistentBottomNavBarItem(
+      PersistentBottomNavBarItem(
         icon: Icon(Icons.stars),
         activeColorPrimary: Colors.deepOrange,
         inactiveColorPrimary: Colors.grey,
@@ -34,7 +36,8 @@ class HomeScreenState extends State<HomeScreen> {
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.collections_sharp),
-        activeColorPrimary: context.watch<NetworkProvider>().selected?.color ?? Colors.blue,
+        activeColorPrimary:
+            context.watch<NetworkProvider>().selected?.color ?? Colors.blue,
         inactiveColorPrimary: Colors.grey,
         inactiveColorSecondary: Colors.purple,
         iconSize: 40,
@@ -42,9 +45,11 @@ class HomeScreenState extends State<HomeScreen> {
       PersistentBottomNavBarItem(
         title: ("Scanner"),
         icon: Icon(Icons.qr_code),
-        activeColorPrimary: context.watch<NetworkProvider>().selected?.color ?? Colors.blue,
+        activeColorPrimary:
+            context.watch<NetworkProvider>().selected?.color ?? Colors.blue,
         activeColorSecondary: Colors.white,
-        inactiveColorPrimary: context.watch<NetworkProvider>().selected?.color ?? Colors.blue,
+        inactiveColorPrimary:
+            context.watch<NetworkProvider>().selected?.color ?? Colors.blue,
         iconSize: 30,
       ),
       PersistentBottomNavBarItem(
@@ -66,11 +71,11 @@ class HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return PersistentTabView(context,
         screens: [
-          Container(),
+          LootDropPage(),
           CollectionsPage(context: context),
           Container(),
-          Container(),
-          Container()
+          MarketPage(),
+          SettingsPage(),
         ],
         items: _navBarsItems(context),
         confineInSafeArea: true,

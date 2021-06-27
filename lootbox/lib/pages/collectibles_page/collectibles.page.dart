@@ -4,6 +4,7 @@ import 'package:gamepower_wallet/common/components/MainAppBar.dart';
 import 'package:gamepower_wallet/models/Collectible.dart';
 import 'package:gamepower_wallet/models/Collection.dart';
 import 'package:gamepower_wallet/providers/collectibles_provider.dart';
+import 'package:gamepower_wallet/providers/network_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:gamepower_wallet/common/constants.dart';
 
@@ -34,6 +35,7 @@ class CollectiblesPageState extends State<CollectiblesPage> {
             context: this.context,
             title: 'Collectibles',
             expandedHeight: 300.0,
+            color: context.watch<NetworkProvider>().selected?.color,
             heroId: widget.arguments.collection?.id,
             backgroundImageUrl: widget.arguments.collection?.image,
           ),
