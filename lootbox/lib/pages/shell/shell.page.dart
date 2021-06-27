@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gamepower_wallet/models/Collection.dart';
-import 'package:gamepower_wallet/models/Network.dart';
+import 'package:gamepower_wallet/common/models/Collection.dart';
+import 'package:gamepower_wallet/common/models/Network.dart';
 import 'package:gamepower_wallet/pages/loot_drop/loot_drop.page.dart';
 import 'package:gamepower_wallet/pages/market/market.page.dart';
 import 'package:gamepower_wallet/pages/settings/settings.page.dart';
@@ -8,14 +8,14 @@ import 'package:gamepower_wallet/providers/collections_provider.dart';
 import 'package:gamepower_wallet/providers/network_provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
-import '../collections_page/collections.page.dart';
+import 'package:gamepower_wallet/pages/collectibles/collections.page.dart';
 
-class HomeScreen extends StatefulWidget {
+class ShellPage extends StatefulWidget {
   @override
-  HomeScreenState createState() => HomeScreenState();
+  ShellPageState createState() => ShellPageState();
 }
 
-class HomeScreenState extends State<HomeScreen> {
+class ShellPageState extends State<ShellPage> {
   void initState() {
     super.initState();
 
