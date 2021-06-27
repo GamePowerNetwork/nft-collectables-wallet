@@ -35,6 +35,12 @@ dependencies:
   # Webview
   flutter_js: 0.1.0+0
 
+  # Provider
+  provider: ^5.0.0
+
+  # Persistent Bottom NavBar
+  persistent_bottom_nav_bar: any
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -54,6 +60,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/js/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

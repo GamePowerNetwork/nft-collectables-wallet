@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
-import './common/constants.dart';
-import './pages/home_page.dart';
+import 'package:gamepower_wallet/providers/collectibles_provider.dart';
+import 'package:gamepower_wallet/providers/collections_provider.dart';
+import 'package:gamepower_wallet/providers/network_provider.dart';
+import 'pages/home_page/home_page.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(
+  MultiProvider(
+    providers: [
+      ChangeNotifierProvider<NetworkProvider>(create: (_) => NetworkProvider()),
+      ChangeNotifierProvider<Collections>(create: (_) => Collections()),
+      ChangeNotifierProvider<Collectibles>(create: (_) => Collectibles()),
+    ],
+    child: MyApp(),
+  )
+);
 
 class MyApp extends StatelessWidget {
   @override
@@ -12,18 +24,21 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: ThemeData(
         brightness: Brightness.dark,
+        backgroundColor: Colors.grey[900],
       ),
       theme: ThemeData(
         brightness: Brightness.light,
-        accentColor: Colors.orange[400],
+        primaryColor: Colors.blue[800],
+        accentColor: Colors.blue[400],
+        scaffoldBackgroundColor: Color(0xFFF3F5F7),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         floatingActionButtonTheme: 
-          FloatingActionButtonThemeData(
-            backgroundColor: Colors.orange[400],
-            foregroundColor: const Color(0xFF242430),
-          ),
+          FloatingActionButtonThemeData(),
       ),
-      home: HomeScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomeScreen(),
+      },
     );
   }
 }
