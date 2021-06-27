@@ -10,10 +10,14 @@ class MainAppBar extends StatelessWidget {
     double? expandedHeight,
     String? heroId,
     String? backgroundImageUrl,
+    Color? color,
+    IconData? icon,
   })  : _title = title,
         _expandedHeight = expandedHeight,
         _backgroundImageUrl = backgroundImageUrl,
         _heroId = heroId,
+        _color = color,
+        _icon = icon,
         super(key: key);
 
   final BuildContext context;
@@ -21,6 +25,8 @@ class MainAppBar extends StatelessWidget {
   final double? _expandedHeight;
   final String? _backgroundImageUrl;
   final String? _heroId;
+  final Color? _color;
+  final IconData? _icon;
 
   Color getTextColorFromBackground(Color color) {
     int d = 0;
@@ -40,7 +46,7 @@ class MainAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      backgroundColor: context.watch<NetworkProvider>().selected?.color,
+      backgroundColor: _color,
       expandedHeight: _expandedHeight ?? 150.0,
       floating: true,
       pinned: false,
@@ -63,6 +69,7 @@ class MainAppBar extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: CircleAvatar(
+                  child: Icon(_icon, color: Colors.grey[350],),
                   backgroundColor: getTextColorFromBackground(
                       context.watch<NetworkProvider>().selected?.color ??
                           Theme.of(context).primaryColor)),

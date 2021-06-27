@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gamepower_wallet/pages/onboarding/onboarding.page.dart';
 import 'package:gamepower_wallet/providers/collectibles_provider.dart';
 import 'package:gamepower_wallet/providers/collections_provider.dart';
 import 'package:gamepower_wallet/providers/network_provider.dart';
-import 'pages/home_page/home_page.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(
@@ -27,9 +27,8 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.grey[900],
       ),
       theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: Colors.blue[800],
-        accentColor: Colors.blue[400],
+        primaryColor: Colors.deepPurple[800],
+        accentColor: Colors.purple[400],
         scaffoldBackgroundColor: Color(0xFFF3F5F7),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         floatingActionButtonTheme: 
@@ -37,7 +36,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => HomeScreen(),
+        '/': (context) => OnBoardingPage(),
       },
     );
   }

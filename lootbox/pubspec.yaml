@@ -29,9 +29,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
-  # SVG in our app
-  flutter_svg: ^0.17.4
-
   # Webview
   flutter_js: 0.1.0+0
 
@@ -40,6 +37,12 @@ dependencies:
 
   # Persistent Bottom NavBar
   persistent_bottom_nav_bar: any
+
+  #introduction screen
+  introduction_screen: ^2.1.0
+
+  #splash screen
+  flutter_native_splash: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +64,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/js/
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -87,3 +91,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/LootBoxFullLogo.png
