@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gamepower_wallet/common/components/api/api.provider.dart';
 import 'package:gamepower_wallet/pages/onboarding/onboarding.page.dart';
 import 'package:gamepower_wallet/providers/collectibles_provider.dart';
 import 'package:gamepower_wallet/providers/collections_provider.dart';
@@ -11,6 +12,7 @@ void main() => runApp(
       ChangeNotifierProvider<NetworkProvider>(create: (_) => NetworkProvider()),
       ChangeNotifierProvider<Collections>(create: (_) => Collections()),
       ChangeNotifierProvider<Collectibles>(create: (_) => Collectibles()),
+      ChangeNotifierProvider<ApiProvider>(create: (_) => ApiProvider()),
     ],
     child: MyApp(),
   )
@@ -27,6 +29,7 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.grey[900],
       ),
       theme: ThemeData(
+        primarySwatch: Colors.red,
         primaryColor: Colors.deepPurple[800],
         accentColor: Colors.purple[400],
         scaffoldBackgroundColor: Color(0xFFF3F5F7),

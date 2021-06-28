@@ -30,7 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   # Webview
-  flutter_js: 0.1.0+0
+  webview_flutter: ^2.0.9
 
   # Provider
   provider: ^5.0.0
@@ -63,8 +63,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-    - assets/js/
-    - assets/
+    - assets/web/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

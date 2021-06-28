@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gamepower_wallet/common/components/api/api.widget.dart';
 import 'package:gamepower_wallet/common/models/Collection.dart';
 import 'package:gamepower_wallet/common/models/Network.dart';
 import 'package:gamepower_wallet/pages/loot_drop/loot_drop.page.dart';
@@ -69,35 +70,37 @@ class ShellPageState extends State<ShellPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(context,
-        screens: [
-          LootDropPage(),
-          CollectionsPage(context: context),
-          Container(),
-          MarketPage(),
-          SettingsPage(),
-        ],
-        items: _navBarsItems(context),
-        confineInSafeArea: true,
-        backgroundColor: Colors.grey[200]!,
-        handleAndroidBackButtonPress: true,
-        resizeToAvoidBottomInset: true,
-        stateManagement: true,
-        navBarHeight: MediaQuery.of(context).viewInsets.bottom > 0
-            ? 0.0
-            : kBottomNavigationBarHeight,
-        hideNavigationBarWhenKeyboardShows: true,
-        decoration: NavBarDecoration(
-          borderRadius: BorderRadius.circular(15.0),
-          colorBehindNavBar: Colors.white,
-        ),
-        popAllScreensOnTapOfSelectedTab: true,
-        popActionScreens: PopActionScreensType.all,
-        itemAnimationProperties: ItemAnimationProperties(
-          // Navigation Bar's items animation properties.
-          duration: Duration(milliseconds: 200),
-          curve: Curves.ease,
-        ),
-        navBarStyle: NavBarStyle.style16);
+    return ApiWidget(
+          child: PersistentTabView(context,
+          screens: [
+            LootDropPage(),
+            CollectionsPage(context: context),
+            Container(),
+            MarketPage(),
+            SettingsPage(),
+          ],
+          items: _navBarsItems(context),
+          confineInSafeArea: true,
+          backgroundColor: Colors.grey[200]!,
+          handleAndroidBackButtonPress: true,
+          resizeToAvoidBottomInset: true,
+          stateManagement: true,
+          navBarHeight: MediaQuery.of(context).viewInsets.bottom > 0
+              ? 0.0
+              : kBottomNavigationBarHeight,
+          hideNavigationBarWhenKeyboardShows: true,
+          decoration: NavBarDecoration(
+            borderRadius: BorderRadius.circular(15.0),
+            colorBehindNavBar: Colors.white,
+          ),
+          popAllScreensOnTapOfSelectedTab: true,
+          popActionScreens: PopActionScreensType.all,
+          itemAnimationProperties: ItemAnimationProperties(
+            // Navigation Bar's items animation properties.
+            duration: Duration(milliseconds: 200),
+            curve: Curves.ease,
+          ),
+          navBarStyle: NavBarStyle.style16),
+    );
   }
 }
