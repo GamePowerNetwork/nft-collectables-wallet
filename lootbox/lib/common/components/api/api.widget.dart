@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gamepower_wallet/common/components/api/api.notification.dart';
 import 'package:gamepower_wallet/common/components/api/api.provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:provider/provider.dart';
@@ -8,12 +9,6 @@ import 'package:provider/provider.dart';
 // ignore: must_be_immutable
 class ApiWidget extends StatefulWidget {
   final Widget child;
-  late WebViewController controller;
-  late BuildContext context;
-
-  void callApi() async {
-    await controller.evaluateJavascript('getPhrase();');
-  }
 
   ApiWidget({required this.child});
   @override
@@ -28,14 +23,19 @@ class _ApiWidgetState extends State<ApiWidget> {
 
     () async {
       await Future.delayed(Duration.zero);
-      context.read<ApiProvider>().setApi(this.widget);
-      this.widget.context = context;
+      
     }();
   }
 
   Widget build(BuildContext context) {
-    return Column(
-      children: [_buildWebView(), Flexible(child: widget.child)],
+    return NotificationListener<ApiRequestNotification>(
+      onNotification: (ApiRequestNotification notification) {
+        _callApi(notification.request.toString());
+        return true;
+      },
+      child: Column(
+        children: [_buildWebView(), Flexible(child: widget.child)],
+      ),
     );
   }
 
@@ -49,7 +49,6 @@ class _ApiWidgetState extends State<ApiWidget> {
           initialUrl: "about:blank",
           onWebViewCreated: (WebViewController controller) {
             _controller = controller;
-            widget.controller = controller;
             context.read<ApiProvider>().apiLoading();
             _loadLocalHtmlFile();
           },
@@ -87,5 +86,9 @@ class _ApiWidgetState extends State<ApiWidget> {
     _controller.loadUrl(Uri.dataFromString(fileText,
             mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
         .toString());
+  }
+
+  _callApi(String method) async {
+    await _controller.evaluateJavascript(method);
   }
 }

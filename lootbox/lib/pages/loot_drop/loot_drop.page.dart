@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gamepower_wallet/common/components/MainAppBar.dart';
+import 'package:gamepower_wallet/common/components/api/api.model.dart';
+import 'package:gamepower_wallet/common/components/api/api.notification.dart';
 import 'package:gamepower_wallet/common/components/api/api.provider.dart';
 import 'package:provider/provider.dart';
 
@@ -9,18 +11,15 @@ class LootDropPage extends StatefulWidget {
 }
 
 class LootDropPageState extends State<LootDropPage> {
-
   void initState() {
     super.initState();
 
     () async {
       await Future.delayed(Duration.zero);
-      
     }();
   }
 
   Widget build(BuildContext context) {
-    print("object");
     return Scaffold(
       body: Container(
         child: CustomScrollView(slivers: <Widget>[
@@ -35,13 +34,20 @@ class LootDropPageState extends State<LootDropPage> {
               child: Column(
             children: <Widget>[
               Consumer<ApiProvider>(
-                builder: (_, api, __) => Text(api.response)
-              ),
-              ElevatedButton(child: Text("Press me"), onPressed: () => context.read<ApiProvider>().callApi(),)
+                  builder: (_, api, __) => Text(api.response)),
+              ElevatedButton(
+                child: Text("Press me"),
+                onPressed: () => _callApi(),
+              )
             ],
           ))
         ]),
       ),
     );
+  }
+
+  _callApi() {
+    RequestData request = RequestData("getPhrase", []);
+    ApiRequestNotification(request).dispatch(context);
   }
 }
