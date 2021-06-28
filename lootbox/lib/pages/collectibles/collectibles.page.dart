@@ -28,6 +28,7 @@ class CollectiblesPageState extends State<CollectiblesPage> {
   }
 
   Widget build(BuildContext context) {
+    print(".... building collectibles ..... ");
     return Scaffold(
       body: Container(
         child: CustomScrollView(slivers: <Widget>[
@@ -45,20 +46,22 @@ class CollectiblesPageState extends State<CollectiblesPage> {
                 top: kGridPadding,
                 right: kGridPadding,
                 bottom: 35),
-            sliver: SliverGrid(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 300.0,
-                mainAxisSpacing: kGridPadding,
-                crossAxisSpacing: kGridPadding,
-                childAspectRatio: 0.95,
-              ),
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return CollectibleGridItem(
-                      collectible:
-                          context.watch<Collectibles>().collectibles[index]);
-                },
-                childCount: context.watch<Collectibles>().collectibles.length,
+            sliver: Consumer<Collectibles>(
+              builder: (_, value, __) => SliverGrid(
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 300.0,
+                  mainAxisSpacing: kGridPadding,
+                  crossAxisSpacing: kGridPadding,
+                  childAspectRatio: 0.95,
+                ),
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return CollectibleGridItem(
+                        collectible:
+                            value.collectibles[index]);
+                  },
+                  childCount: value.collectibles.length,
+                ),
               ),
             ),
           ),

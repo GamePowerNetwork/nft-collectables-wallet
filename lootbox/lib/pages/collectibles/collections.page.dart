@@ -31,16 +31,16 @@ class CollectionsPage extends StatelessWidget {
           sliver: SliverGrid(
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 300.0,
-              mainAxisSpacing: kGridPadding,
+              mainAxisSpacing: 40,
               crossAxisSpacing: kGridPadding,
               childAspectRatio: 0.95,
             ),
             delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
+              (BuildContext _, int index) {
                 return InkWell(
                   onTap: () => Navigator.of(context).push(
                     CustomPageRoute(
-                        builder: (context) => CollectiblesPage(
+                        builder: (_) => CollectiblesPage(
                               CollectiblesPageArguments(
                                   collection: context
                                       .watch<Collections>()
