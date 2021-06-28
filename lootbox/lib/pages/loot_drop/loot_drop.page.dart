@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gamepower_wallet/common/components/MainAppBar.dart';
+import 'package:gamepower_wallet/common/components/PageBase.dart';
 import 'package:gamepower_wallet/common/components/api/api.model.dart';
 import 'package:gamepower_wallet/common/components/api/api.notification.dart';
 import 'package:gamepower_wallet/common/components/api/api.provider.dart';
@@ -11,37 +11,21 @@ class LootDropPage extends StatefulWidget {
 }
 
 class LootDropPageState extends State<LootDropPage> {
-  void initState() {
-    super.initState();
-
-    () async {
-      await Future.delayed(Duration.zero);
-    }();
-  }
-
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: CustomScrollView(slivers: <Widget>[
-          MainAppBar(
-            context: this.context,
-            title: 'Loot Drops',
-            expandedHeight: 300.0,
-            color: Colors.deepOrange,
-            icon: Icons.stars,
-          ),
-          SliverToBoxAdapter(
-              child: Column(
-            children: <Widget>[
-              Consumer<ApiProvider>(
-                  builder: (_, api, __) => Text(api.response)),
-              ElevatedButton(
-                child: Text("Press me"),
-                onPressed: () => _callApi(),
-              )
-            ],
-          ))
-        ]),
+    return PageBase(
+      pageOptions: PageBaseOptions(
+        title: "Loot Drops",
+        headerIcon: Icons.stars,
+        headerColor: Colors.red,
+      ),
+      child: Column(
+        children: <Widget>[
+          Consumer<ApiProvider>(builder: (_, api, __) => Text(api.response)),
+          ElevatedButton(
+            child: Text("Press me"),
+            onPressed: () => _callApi(),
+          )
+        ],
       ),
     );
   }

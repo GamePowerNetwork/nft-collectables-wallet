@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gamepower_wallet/common/components/CollectibleGridItem.dart';
-import 'package:gamepower_wallet/common/components/MainAppBar.dart';
+import 'package:gamepower_wallet/common/components/PageBase.dart';
 import 'package:gamepower_wallet/common/models/Collectible.dart';
 import 'package:gamepower_wallet/common/models/Collection.dart';
 import 'package:gamepower_wallet/providers/collectibles_provider.dart';
@@ -28,45 +28,43 @@ class CollectiblesPageState extends State<CollectiblesPage> {
   }
 
   Widget build(BuildContext context) {
-    print(".... building collectibles ..... ");
     return Scaffold(
-      body: Container(
-        child: CustomScrollView(slivers: <Widget>[
-          MainAppBar(
-            context: this.context,
-            title: 'Collectibles',
-            expandedHeight: 300.0,
-            color: context.watch<NetworkProvider>().selected?.color,
-            heroId: widget.arguments.collection?.id,
-            backgroundImageUrl: widget.arguments.collection?.image,
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.only(
-                left: kGridPadding,
-                top: kGridPadding,
-                right: kGridPadding,
-                bottom: 35),
-            sliver: Consumer<Collectibles>(
-              builder: (_, value, __) => SliverGrid(
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 300.0,
-                  mainAxisSpacing: kGridPadding,
-                  crossAxisSpacing: kGridPadding,
-                  childAspectRatio: 0.95,
-                ),
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return CollectibleGridItem(
-                        collectible:
-                            value.collectibles[index]);
-                  },
-                  childCount: value.collectibles.length,
+      body: PageBase(
+        pageOptions: PageBaseOptions(
+          title: "Collectibles",
+          headerHeight: 300.0,
+          headerIcon: Icons.collections_sharp,
+          headerColor: context.watch<NetworkProvider>().selected?.color ?? Colors.purple,
+          headerHeroId: widget.arguments.collection?.id,
+          headerBackgroundImage: widget.arguments.collection?.image,
+          isSliverChild: true,
+        ),
+        child: SliverPadding(
+              padding: const EdgeInsets.only(
+                  left: kGridPadding,
+                  top: kGridPadding,
+                  right: kGridPadding,
+                  bottom: 35),
+              sliver: Consumer<Collectibles>(
+                builder: (_, value, __) => SliverGrid(
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 300.0,
+                    mainAxisSpacing: kGridPadding,
+                    crossAxisSpacing: kGridPadding,
+                    childAspectRatio: 0.95,
+                  ),
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      return CollectibleGridItem(
+                          collectible:
+                              value.collectibles[index]);
+                    },
+                    childCount: value.collectibles.length,
+                  ),
                 ),
               ),
             ),
-          ),
-        ]),
-      ),
+        ),
     );
   }
 }
