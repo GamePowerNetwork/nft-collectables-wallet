@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gamepower_wallet/common/components/MainAppBar.dart';
+import 'package:gamepower_wallet/common/components/PageBase.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -8,18 +8,13 @@ class SettingsPage extends StatefulWidget {
 
 class SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: CustomScrollView(slivers: <Widget>[
-          MainAppBar(
-            context: this.context,
-            title: 'Settings',
-            expandedHeight: 300.0,
-            color: Colors.indigo,
-            icon: Icons.settings,
-          ),
-        ]),
+    return PageBase(
+      pageOptions: PageBaseOptions(
+        title: "Settings",
+        headerIcon: Icons.settings,
+        headerColor: Colors.indigo,
       ),
-    );
+      child: Container()
+      );
   }
 }

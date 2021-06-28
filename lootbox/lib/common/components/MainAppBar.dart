@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:gamepower_wallet/providers/network_provider.dart';
-import 'package:provider/provider.dart';
 
 class MainAppBar extends StatelessWidget {
   const MainAppBar({
     Key? key,
     required this.context,
     required String title,
+    required String subTitle,
     double? expandedHeight,
     String? heroId,
     String? backgroundImageUrl,
     Color? color,
     IconData? icon,
   })  : _title = title,
+        _subTitle = subTitle,
         _expandedHeight = expandedHeight,
         _backgroundImageUrl = backgroundImageUrl,
         _heroId = heroId,
@@ -22,6 +22,7 @@ class MainAppBar extends StatelessWidget {
 
   final BuildContext context;
   final String _title;
+  final String _subTitle;
   final double? _expandedHeight;
   final String? _backgroundImageUrl;
   final String? _heroId;
@@ -70,9 +71,8 @@ class MainAppBar extends StatelessWidget {
               padding: const EdgeInsets.only(right: 8.0),
               child: CircleAvatar(
                   child: Icon(_icon, color: Colors.grey[350],),
-                  backgroundColor: getTextColorFromBackground(
-                      context.watch<NetworkProvider>().selected?.color ??
-                          Theme.of(context).primaryColor)),
+                  backgroundColor: getTextColorFromBackground(_color!)
+              ),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -80,21 +80,16 @@ class MainAppBar extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  context.watch<NetworkProvider>().selected?.name ??
-                      'Loading...',
+                  _subTitle,
                   style: TextStyle(
                     fontSize: 12.0,
-                    color: getTextColorFromBackground(
-                        context.watch<NetworkProvider>().selected?.color ??
-                            Theme.of(context).primaryColor),
+                    color: getTextColorFromBackground(_color!),
                   ),
                 ),
                 Text(
                   _title,
                   style: TextStyle(
-                    color: getTextColorFromBackground(
-                        context.watch<NetworkProvider>().selected?.color ??
-                            Theme.of(context).primaryColor),
+                    color: getTextColorFromBackground(_color!),
                   ),
                 ),
               ],

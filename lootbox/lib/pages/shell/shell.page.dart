@@ -31,7 +31,7 @@ class ShellPageState extends State<ShellPage> {
     return [
       PersistentBottomNavBarItem(
         icon: Icon(Icons.stars),
-        activeColorPrimary: Colors.deepOrange,
+        activeColorPrimary: Colors.red,
         inactiveColorPrimary: Colors.grey,
         iconSize: 40,
       ),
@@ -74,7 +74,7 @@ class ShellPageState extends State<ShellPage> {
           child: PersistentTabView(context,
           screens: [
             LootDropPage(),
-            CollectionsPage(context: context),
+            CollectionsPage(),
             Container(),
             MarketPage(),
             SettingsPage(),
