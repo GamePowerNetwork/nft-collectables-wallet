@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gamepower_wallet/common/components/api/api.notification.dart';
 import 'package:gamepower_wallet/common/components/api/api.provider.dart';
+import 'package:gamepower_wallet/state/api.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -16,18 +17,21 @@ class ApiWidget extends StatefulWidget {
 }
 
 class _ApiWidgetState extends State<ApiWidget> {
-  late WebViewController _controller;
+  WebViewController? _controller;
+  ApiStore? store;
 
   void initState() {
     super.initState();
-
     () async {
       await Future.delayed(Duration.zero);
-      
+      store = Provider.of<ApiStore>(context, listen: false);
+      store!.setState(ApiStoreState.loading);
     }();
   }
 
+  @override
   Widget build(BuildContext context) {
+    final store = Provider.of<ApiStore>(context);
     return NotificationListener<ApiRequestNotification>(
       onNotification: (ApiRequestNotification notification) {
         _callApi(notification.request.toString());
@@ -69,7 +73,7 @@ class _ApiWidgetState extends State<ApiWidget> {
     return JavascriptChannel(
         name: 'ApiReady',
         onMessageReceived: (JavascriptMessage msg) async {
-          context.read<ApiProvider>().apiConnected();
+          store!.setState(ApiStoreState.loaded);
         });
   }
 
@@ -83,12 +87,12 @@ class _ApiWidgetState extends State<ApiWidget> {
 
   _loadLocalHtmlFile() async {
     String fileText = await rootBundle.loadString('assets/web/api.html');
-    _controller.loadUrl(Uri.dataFromString(fileText,
+    _controller!.loadUrl(Uri.dataFromString(fileText,
             mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
         .toString());
   }
 
   _callApi(String method) async {
-    await _controller.evaluateJavascript(method);
+    await _controller!.evaluateJavascript(method);
   }
 }
