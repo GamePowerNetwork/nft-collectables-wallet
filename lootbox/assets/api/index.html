@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="//unpkg.com/polkadot-js-bundle/polkadot.js"></script>
+</head>
+<body>
+<script type="module">
+/**============================================
+/
+/             Javascript API Code
+/
+/============================================**/
+import { getPhrase } from './api.js';
+
+window.addEventListener("flutterInAppWebViewPlatformReady", function(event) {
+    window.flutter_inappwebview.callHandler('onChannelMessage', {channel: 'App', data: "ready"}).then(function(result) {
+      console.log(result);
+    });
+});
+</script>
+</body>
+</html>
