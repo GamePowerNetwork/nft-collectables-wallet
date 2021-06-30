@@ -39,6 +39,13 @@ mixin _$ApiStore on ApiStoreBase, Store {
     });
   }
 
+  final _$initAppAsyncAction = AsyncAction('ApiStoreBase.initApp');
+
+  @override
+  Future<void> initApp(Keyring keyring) {
+    return _$initAppAsyncAction.run(() => super.initApp(keyring));
+  }
+
   final _$ApiStoreBaseActionController = ActionController(name: 'ApiStoreBase');
 
   @override

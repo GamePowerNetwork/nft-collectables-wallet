@@ -36,6 +36,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.6.1"
+  auth_header:
+    dependency: transitive
+    description:
+      name: auth_header
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -209,6 +216,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_inappwebview:
+    dependency: "direct main"
+    description:
+      name: flutter_inappwebview
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.3.2"
   flutter_mobx:
     dependency: "direct main"
     description:
@@ -270,6 +284,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  http_server:
+    dependency: transitive
+    description:
+      name: http_server
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   image:
     dependency: transitive
     description:
@@ -291,6 +312,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  jaguar:
+    dependency: "direct main"
+    description:
+      name: jaguar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.11"
+  jaguar_common:
+    dependency: transitive
+    description:
+      name: jaguar_common
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
+  jaguar_flutter_asset:
+    dependency: "direct main"
+    description:
+      name: jaguar_flutter_asset
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
   js:
     dependency: transitive
     description:
@@ -375,6 +417,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  path_tree:
+    dependency: transitive
+    description:
+      name: path_tree
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
   pedantic:
     dependency: transitive
     description:

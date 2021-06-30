@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gamepower_wallet/common/components/api/api.widget.dart';
 import 'package:gamepower_wallet/common/models/Collection.dart';
 import 'package:gamepower_wallet/common/models/Network.dart';
 import 'package:gamepower_wallet/pages/loot_drop/loot_drop.page.dart';
@@ -7,8 +6,9 @@ import 'package:gamepower_wallet/pages/market/market.page.dart';
 import 'package:gamepower_wallet/pages/settings/settings.page.dart';
 import 'package:gamepower_wallet/providers/collections_provider.dart';
 import 'package:gamepower_wallet/providers/network_provider.dart';
-import 'package:gamepower_wallet/state/api.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:gamepower_wallet/state/app.dart';
+import 'package:gamepower_wallet/state/keyring.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:gamepower_wallet/pages/collectibles/collections.page.dart';
@@ -20,10 +20,13 @@ class ShellPage extends StatefulWidget {
 }
 
 class ShellPageState extends State<ShellPage> {
+  AppState? appState;
+
   void initState() {
     super.initState();
     () async {
       await Future.delayed(Duration.zero);
+      
       context.read<NetworkProvider>().selectNetwork(selectedNetwork);
       context.read<Collections>().setCollections(collections);
     }();
@@ -105,17 +108,21 @@ class ShellPageState extends State<ShellPage> {
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<ApiStore>(context);
-    return ApiWidget(child: Observer(builder: (_) {
-      switch (store.state) {
-        case ApiStoreState.initial:
-        case ApiStoreState.loading:
-          context.loaderOverlay.show();
-          return _buildTabView(context);
-        case ApiStoreState.loaded:
+    appState = Provider.of<AppState>(context);
+    Keyring keyringStore = Provider.of<Keyring>(context);
+    appState?.initApp(keyringStore);
+
+    return Observer(builder: (_) {
+      switch (appState?.state) {
+        case AppCurrentState.ready:
           context.loaderOverlay.hide();
           return _buildTabView(context);
+        case AppCurrentState.loading:
+          context.loaderOverlay.show();
+          return _buildTabView(context);
+        default:
+          return Container();
       }
-    }));
+    });
   }
 }

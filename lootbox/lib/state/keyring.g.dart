@@ -9,29 +9,40 @@ part of 'keyring.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Keyring on KeyringBase, Store {
-  final _$phraseAtom = Atom(name: 'KeyringBase.phrase');
+  final _$channelAtom = Atom(name: 'KeyringBase.channel');
 
   @override
-  String get phrase {
-    _$phraseAtom.reportRead();
-    return super.phrase;
+  KeyringChannel get channel {
+    _$channelAtom.reportRead();
+    return super.channel;
   }
 
   @override
-  set phrase(String value) {
-    _$phraseAtom.reportWrite(value, super.phrase, () {
-      super.phrase = value;
+  set channel(KeyringChannel value) {
+    _$channelAtom.reportWrite(value, super.channel, () {
+      super.channel = value;
     });
   }
 
   final _$KeyringBaseActionController = ActionController(name: 'KeyringBase');
 
   @override
-  void setPhrase(dynamic _phrase) {
+  dynamic onChannelData(dynamic data) {
     final _$actionInfo = _$KeyringBaseActionController.startAction(
-        name: 'KeyringBase.setPhrase');
+        name: 'KeyringBase.onChannelData');
     try {
-      return super.setPhrase(_phrase);
+      return super.onChannelData(data);
+    } finally {
+      _$KeyringBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic init(WebViewService webViewService) {
+    final _$actionInfo =
+        _$KeyringBaseActionController.startAction(name: 'KeyringBase.init');
+    try {
+      return super.init(webViewService);
     } finally {
       _$KeyringBaseActionController.endAction(_$actionInfo);
     }
@@ -40,7 +51,7 @@ mixin _$Keyring on KeyringBase, Store {
   @override
   String toString() {
     return '''
-phrase: ${phrase}
+channel: ${channel}
     ''';
   }
 }
