@@ -1,4 +1,4 @@
-import 'package:gamepower_wallet/data/model/Channel.dart';
+import 'package:gamepower_wallet/data/model/channels/Channel.dart';
 
 class KeyringChannel extends Channel {
   @override
