@@ -67,7 +67,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - assets/icons/
     - assets/api/
     - assets/api/polkadot/
 
