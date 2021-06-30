@@ -1,4 +1,4 @@
-import 'package:gamepower_wallet/data/model/KeyringChannel.dart';
+import 'package:gamepower_wallet/data/model/channels/KeyringChannel.dart';
 import 'package:gamepower_wallet/service/webView.service.dart';
 import 'package:mobx/mobx.dart';
 

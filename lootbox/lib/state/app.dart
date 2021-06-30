@@ -1,4 +1,4 @@
-import 'package:gamepower_wallet/data/model/AppChannel.dart';
+import 'package:gamepower_wallet/data/model/channels/AppChannel.dart';
 import 'package:gamepower_wallet/service/webView.service.dart';
 import 'package:mobx/mobx.dart';
 

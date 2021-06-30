@@ -1,5 +1,5 @@
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:gamepower_wallet/data/model/Channel.dart';
+import 'package:gamepower_wallet/data/model/channels/Channel.dart';
 import 'package:jaguar/jaguar.dart';
 import 'package:jaguar_flutter_asset/jaguar_flutter_asset.dart';
 
@@ -18,9 +18,6 @@ class WebViewService {
             _createChannelHandlers(),
         onConsoleMessage: (controller, consoleMessage) {
           print("WebView CONSOLE MESSAGE: " + consoleMessage.message);
-        },
-        onLoadStop: (controller, url) {
-          print('webview loaded');
         },
         onLoadHttpError: (controller, url, statusCode, description) =>
             print(description),
@@ -61,6 +58,6 @@ class WebViewService {
     channels.forEach((channel) {
       channel.callback(args[0]['data']);
     });
-    return "Hello from Flutter";
+    return true;
   }
 }
