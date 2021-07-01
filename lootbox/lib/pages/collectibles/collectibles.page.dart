@@ -34,7 +34,7 @@ class CollectiblesPageState extends State<CollectiblesPage> {
           title: "Collectibles",
           headerHeight: 300.0,
           headerIcon: Icons.collections_sharp,
-          headerColor: context.watch<NetworkProvider>().selected?.color ?? Colors.purple,
+          pageColor: context.watch<NetworkProvider>().selected?.color ?? Colors.purple,
           headerHeroId: widget.arguments.collection?.id,
           headerBackgroundImage: widget.arguments.collection?.image,
           isSliverChild: true,

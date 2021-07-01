@@ -5,6 +5,7 @@ import 'package:gamepower_wallet/common/components/PageBase.dart';
 import 'package:gamepower_wallet/common/constants/constants.dart';
 import 'package:gamepower_wallet/providers/collections_provider.dart';
 import 'package:gamepower_wallet/providers/network_provider.dart';
+import 'package:gamepower_wallet/state/app.dart';
 import 'package:provider/provider.dart';
 import 'collectibles.page.dart';
 
@@ -15,12 +16,13 @@ class CollectionsPage extends StatefulWidget {
 
 class CollectionsPageState extends State<CollectionsPage> {
   Widget build(BuildContext context) {
+    AppState appState = Provider.of<AppState>(context);
     return PageBase(
       pageOptions: PageBaseOptions(
         title: "Collections",
         subTitle: context.watch<NetworkProvider>().selected?.name ?? '',
         headerIcon: Icons.collections_sharp,
-        headerColor: context.watch<NetworkProvider>().selected?.color ?? Colors.purple,
+        pageColor: context.watch<NetworkProvider>().selected?.color ?? appState.pageColor,
         isSliverChild: true,
       ),
       child: SliverPadding(

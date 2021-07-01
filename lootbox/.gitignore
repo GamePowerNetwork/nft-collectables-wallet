@@ -1,4 +1,5 @@
 # Miscellaneous
+*.mapper.g.dart
 *.class
 *.log
 *.pyc

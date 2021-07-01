@@ -2,20 +2,21 @@
 <html>
 <head>
     <script src="//unpkg.com/polkadot-js-bundle/polkadot.js"></script>
+    <script type="module" src="./api.js"></script>
 </head>
 <body>
 <script type="module">
-/**============================================
-/
-/             Javascript API Code
-/
-/============================================**/
-import { getPhrase } from './api.js';
+import * as api from './api.js';
+
+window.send = console.log;
+window.api = api;
 
 window.addEventListener("flutterInAppWebViewPlatformReady", function(event) {
-    window.flutter_inappwebview.callHandler('onChannelMessage', {channel: 'App', data: "ready"}).then(function(result) {
-      console.log(result);
-    });
+    /*window.flutter_inappwebview.callHandler('onChannelMessage', {channel: 'App', state: "ready"}).then(function(result) {
+      send("done");
+    });*/
+    let response = JSON.stringify({name: 'App', state: "ready"});
+    send(response);
 });
 </script>
 </body>

@@ -21,7 +21,7 @@ class PageBaseState extends State<PageBase> {
             title: widget.pageOptions.title,
             subTitle: widget.pageOptions.subTitle,
             expandedHeight: widget.pageOptions.headerHeight,
-            color: widget.pageOptions.headerColor,
+            color: widget.pageOptions.pageColor,
             icon: widget.pageOptions.headerIcon,
             heroId: widget.pageOptions.headerHeroId,
             backgroundImageUrl: widget.pageOptions.headerBackgroundImage,
@@ -44,7 +44,7 @@ class PageBaseOptions {
   String title;
   String subTitle;
   double headerHeight;
-  Color headerColor;
+  Color pageColor;
   IconData headerIcon;
   String? headerHeroId;
   String? headerBackgroundImage;
@@ -54,7 +54,7 @@ class PageBaseOptions {
     this.title = '',
     this.subTitle = '',
     this.headerHeight = kDefaultAppBarHeight,
-    this.headerColor = kDefaultAppBarColor,
+    this.pageColor = kDefaultAppBarColor,
     this.headerIcon = Icons.public_sharp,
     this.isSliverChild = false,
     this.headerHeroId,

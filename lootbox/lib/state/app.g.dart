@@ -32,6 +32,21 @@ mixin _$AppState on _AppStateBase, Store {
     });
   }
 
+  final _$pageColorAtom = Atom(name: '_AppStateBase.pageColor');
+
+  @override
+  MaterialColor get pageColor {
+    _$pageColorAtom.reportRead();
+    return super.pageColor;
+  }
+
+  @override
+  set pageColor(MaterialColor value) {
+    _$pageColorAtom.reportWrite(value, super.pageColor, () {
+      super.pageColor = value;
+    });
+  }
+
   final _$initAppAsyncAction = AsyncAction('_AppStateBase.initApp');
 
   @override
@@ -43,11 +58,11 @@ mixin _$AppState on _AppStateBase, Store {
       ActionController(name: '_AppStateBase');
 
   @override
-  dynamic onChannelData(dynamic data) {
+  void setPageColor(MaterialColor color) {
     final _$actionInfo = _$_AppStateBaseActionController.startAction(
-        name: '_AppStateBase.onChannelData');
+        name: '_AppStateBase.setPageColor');
     try {
-      return super.onChannelData(data);
+      return super.setPageColor(color);
     } finally {
       _$_AppStateBaseActionController.endAction(_$actionInfo);
     }
@@ -57,6 +72,7 @@ mixin _$AppState on _AppStateBase, Store {
   String toString() {
     return '''
 channel: ${channel},
+pageColor: ${pageColor},
 state: ${state}
     ''';
   }

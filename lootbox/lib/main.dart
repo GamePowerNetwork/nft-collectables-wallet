@@ -39,8 +39,8 @@ class MyApp extends StatelessWidget {
           size: 70.0,
         ),
       ),
-      overlayColor: Colors.black,
-      overlayOpacity: 0.8,
+      overlayColor: Colors.red,
+      overlayOpacity: 0.4,
       child: MaterialApp(
         title: 'LootBox Wallet',
         debugShowCheckedModeBanner: false,
