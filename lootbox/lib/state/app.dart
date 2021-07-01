@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:gamepower_wallet/common/constants/constants.dart';
 import 'package:gamepower_wallet/data/model/channels/AppChannel.dart';
 import 'package:gamepower_wallet/service/webView.service.dart';
 import 'package:mobx/mobx.dart';
@@ -8,43 +10,39 @@ part 'app.g.dart';
 
 class AppState = _AppStateBase with _$AppState;
 
-enum AppCurrentState { initial, loading, ready }
-
 abstract class _AppStateBase with Store {
   final WebViewService _webViewService;
 
   _AppStateBase(this._webViewService);
 
   @observable
-  AppChannel channel = AppChannel(null);
+  AppChannel channel = AppChannel(name: kAppChannel);
+
+  @observable
+  MaterialColor pageColor = Colors.red;
 
   @computed 
-  AppCurrentState get state {
-    if(channel.data == 'loading') {
-      return AppCurrentState.loading;
-    } else if(channel.data == 'ready') {
-      return AppCurrentState.ready;
-    }
+  AppCurrentState get state => channel.state;
 
-    return AppCurrentState.initial;
-  }
-
-  @action onChannelData(dynamic data) {
-    AppChannel updated = AppChannel(data);
-    channel = updated;
+  void onChannelData(Map<String, dynamic> json) {
+    channel = AppChannel.fromJson(json);
   }
 
   @action 
   Future<void> initApp(Keyring keyring) async {
     // Start loading app
-    channel = AppChannel('loading');
+    channel.state = AppCurrentState.loading;
 
     // Load services
     keyring.init(_webViewService);
 
     // App Channel
-    channel.callback = onChannelData;
-    _webViewService.subscribeToChannel(channel);
+    _webViewService.subscribeToChannel(channel.name, onChannelData);
     await _webViewService.init();
+  }
+
+  @action 
+  void setPageColor(MaterialColor color) {
+    pageColor = color;
   }
 }

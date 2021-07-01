@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:gamepower_wallet/data/model/channels/Channel.dart';
 import 'package:jaguar/jaguar.dart';
@@ -5,7 +7,7 @@ import 'package:jaguar_flutter_asset/jaguar_flutter_asset.dart';
 
 class WebViewService {
   HeadlessInAppWebView? _web;
-  Map<String, List<Channel>> channelSubscriptions = new Map<String, List<Channel>>();
+  Map<String, List<Function>> channelSubscriptions = new Map<String, List<Function>>();
 
   Future<void> init() async {
     if (_web == null) {
@@ -17,7 +19,13 @@ class WebViewService {
         onWebViewCreated: (controller) =>
             _createChannelHandlers(),
         onConsoleMessage: (controller, consoleMessage) {
-          print("WebView CONSOLE MESSAGE: " + consoleMessage.message);
+          print("WebService Debug: " + consoleMessage.message);
+          final jsonDecoder = JsonDecoder();
+          final Map<String, dynamic> message = jsonDecoder.convert(consoleMessage.message);
+
+          if(message['name'] != null) {
+            _onChannelMessage(message);
+          }
         },
         onLoadHttpError: (controller, url, statusCode, description) =>
             print(description),
@@ -35,11 +43,11 @@ class WebViewService {
     }
   }
 
-  void subscribeToChannel(Channel channel) {
-    if(channelSubscriptions[channel.name] == null) {
-      channelSubscriptions[channel.name] = <Channel>[channel];
+  void subscribeToChannel(String name, Function callback) {
+    if(channelSubscriptions[name] == null) {
+      channelSubscriptions[name] = <Function>[callback];
     } else {
-      channelSubscriptions[channel.name]?.add(channel);
+      channelSubscriptions[name]?.add(callback);
     }
   }
 
@@ -50,14 +58,23 @@ class WebViewService {
   }
 
   void _createChannelHandlers() {
-    _web?.webViewController.addJavaScriptHandler(handlerName: "onChannelMessage", callback: _onChannelMessage);
+    //_web?.webViewController.addJavaScriptHandler(handlerName: "onChannelMessage", callback: _onChannelMessage);
   }
 
-  dynamic _onChannelMessage(args) {
-    List<Channel> channels = channelSubscriptions[args[0]['channel'].toString()]!;
-    channels.forEach((channel) {
-      channel.callback(args[0]['data']);
+  void _onChannelMessage(Map<String, dynamic> message) {
+    List<Function> callbacks = channelSubscriptions[message['name'].toString()]!;
+    callbacks.forEach((callback) {
+      callback(message);
     });
-    return true;
+  }
+
+  void request(Map<String, dynamic> json) {
+    final jsonEncoder = JsonEncoder();
+    final arguments = jsonEncoder.convert(json);
+    _web?.webViewController.evaluateJavascript(source: 
+    """
+      api.request('${json['name']}', '${arguments}');
+    """
+    );
   }
 }
