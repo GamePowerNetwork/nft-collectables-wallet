@@ -10,6 +10,8 @@ AppChannel _$AppChannelFromJson(Map<String, dynamic> json) {
   return AppChannel(
     name: json['name'] as String,
     state: _$enumDecode(_$AppCurrentStateEnumMap, json['state']),
+    messageType:
+        _$enumDecode(_$AppChannelMessageTypeEnumMap, json['messageType']),
   );
 }
 
@@ -17,6 +19,7 @@ Map<String, dynamic> _$AppChannelToJson(AppChannel instance) =>
     <String, dynamic>{
       'name': instance.name,
       'state': _$AppCurrentStateEnumMap[instance.state],
+      'messageType': _$AppChannelMessageTypeEnumMap[instance.messageType],
     };
 
 K _$enumDecode<K, V>(
@@ -49,4 +52,9 @@ const _$AppCurrentStateEnumMap = {
   AppCurrentState.initial: 'initial',
   AppCurrentState.loading: 'loading',
   AppCurrentState.ready: 'ready',
+};
+
+const _$AppChannelMessageTypeEnumMap = {
+  AppChannelMessageType.none: 'none',
+  AppChannelMessageType.state: 'state',
 };

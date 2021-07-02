@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:gamepower_wallet/common/components/TabView.dart';
-import 'package:gamepower_wallet/common/models/Collection.dart';
-import 'package:gamepower_wallet/common/models/Network.dart';
-import 'package:gamepower_wallet/data/model/channels/AppChannel.dart';
-import 'package:gamepower_wallet/providers/collections_provider.dart';
-import 'package:gamepower_wallet/providers/network_provider.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:lootbox_wallet/pages/onboarding/onboarding.page.dart';
+import 'package:lootbox_wallet/common/models/Collection.dart';
+import 'package:lootbox_wallet/common/models/Network.dart';
+import 'package:lootbox_wallet/data/model/channels/AppChannel.dart';
+import 'package:lootbox_wallet/pages/shell/components/TabView.dart';
+import 'package:lootbox_wallet/pages/wallet_setup/wallet_setup.page.dart';
+import 'package:lootbox_wallet/providers/collections_provider.dart';
+import 'package:lootbox_wallet/providers/network_provider.dart';
 import 'package:mobx/mobx.dart';
-import 'package:gamepower_wallet/state/app.dart';
-import 'package:gamepower_wallet/state/keyring.dart';
+import 'package:lootbox_wallet/state/app.dart';
+import 'package:lootbox_wallet/state/keyring.dart';
 import 'package:provider/provider.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -35,10 +38,9 @@ class ShellPageState extends State<ShellPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     appState = Provider.of<AppState>(context);
-    _appStateDisposer = reaction(
-      (_) => appState.state,
-      (state){
-        switch(state) {
+    _appStateDisposer = autorun(
+      (_) {
+        switch(appState.state) {
           case AppCurrentState.loading:
           case AppCurrentState.initial:
             context.loaderOverlay.show();
@@ -64,6 +66,20 @@ class ShellPageState extends State<ShellPage> {
       appState.initApp(keyringStore);
     }
 
-    return TabView();
+    return Observer(
+      builder: (_) {
+
+        if(appState.state != AppCurrentState.ready)
+          return Container(color: Colors.black,);
+        
+        if(appState.user != null)
+          return TabView();
+
+        if(appState.isOnboarding == true)
+          return OnBoardingPage();
+
+        return WalletSetup();
+      }
+    );
   }
 }

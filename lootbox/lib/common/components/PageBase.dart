@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gamepower_wallet/common/components/MainAppBar.dart';
-import 'package:gamepower_wallet/common/constants/constants.dart';
+import 'package:lootbox_wallet/common/components/MainAppBar.dart';
+import 'package:lootbox_wallet/common/constants/constants.dart';
 
 class PageBase extends StatefulWidget {
   final Widget child;
