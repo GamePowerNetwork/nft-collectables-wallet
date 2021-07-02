@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:gamepower_wallet/common/components/CustomPageRoute.dart';
-import 'package:gamepower_wallet/pages/shell/shell.page.dart';
+import 'package:lootbox_wallet/state/app.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:provider/provider.dart';
 
 class OnBoardingPage extends StatefulWidget {
   @override
@@ -10,12 +10,16 @@ class OnBoardingPage extends StatefulWidget {
 }
 
 class _OnBoardingPageState extends State<OnBoardingPage> {
+  late AppState appState;
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
+    appState.completeOnboarding();
+    /*
     Navigator.of(context).push(
-      CustomPageRoute(builder: (_) => ShellPage()),
+      CustomPageRoute(builder: (_) => TabView()),
     );
+    */
   }
 
   Widget _buildImage(String assetName, [double width = 350]) {
@@ -24,6 +28,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   @override
   Widget build(BuildContext context) {
+    appState = Provider.of<AppState>(context);
+
     const bodyStyle = TextStyle(fontSize: 19.0, color: Colors.black);
 
     const pageDecoration = const PageDecoration(

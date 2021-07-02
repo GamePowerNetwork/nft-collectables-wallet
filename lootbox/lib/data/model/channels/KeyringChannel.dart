@@ -1,4 +1,4 @@
-import 'package:gamepower_wallet/common/constants/constants.dart';
+import 'package:lootbox_wallet/common/constants/constants.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'KeyringChannel.g.dart';

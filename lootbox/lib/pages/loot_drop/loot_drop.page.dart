@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gamepower_wallet/common/components/PageBase.dart';
+import 'package:lootbox_wallet/common/components/PageBase.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:gamepower_wallet/state/app.dart';
-import 'package:gamepower_wallet/state/keyring.dart';
+import 'package:lootbox_wallet/state/app.dart';
+import 'package:lootbox_wallet/state/keyring.dart';
 import 'package:provider/provider.dart';
 
 class LootDropPage extends StatefulWidget {
@@ -33,6 +33,13 @@ class LootDropPageState extends State<LootDropPage> {
             child: Observer(
               builder: (_) {
                 return Text("${keyring.phrase}");
+              },
+            ),
+          ),
+          Container(
+            child: Observer(
+              builder: (_) {
+                return Text("${appState.user?.email}");
               },
             ),
           ),

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "571002288984",
+    "project_id": "lootbox-wallet",
+    "storage_bucket": "lootbox-wallet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571002288984:android:29edeb051d7186af37c32d",
+        "android_client_info": {
+          "package_name": "io.gamepower.lootbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571002288984-vdard6o9f9ug9f0544hg0kdt7aj9ekqj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.gamepower.lootbox",
+            "certificate_hash": "395232add0d37c6d5f1b33a027ad7fef1a39fa95"
+          }
+        },
+        {
+          "client_id": "571002288984-46ha63n8074sna0u5m6auugpko05b3qc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIDqbZFXLS5s6kVcLDeLCWwmcPgvNJdeY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571002288984-46ha63n8074sna0u5m6auugpko05b3qc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "571002288984-6qsqaosukg38jdd1bg69rnc5bppvna09.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gamepower.lootbox",
+                "app_store_id": "1563598995"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

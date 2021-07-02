@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gamepower_wallet/common/models/Collectible.dart';
-import 'package:gamepower_wallet/providers/network_provider.dart';
+import 'package:lootbox_wallet/common/models/Collectible.dart';
+import 'package:lootbox_wallet/providers/network_provider.dart';
 import 'package:provider/provider.dart';
 
 class CollectibleGridItem extends StatelessWidget {
