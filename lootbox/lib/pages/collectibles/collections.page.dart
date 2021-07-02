@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gamepower_wallet/common/components/CollectionGridItem.dart';
-import 'package:gamepower_wallet/common/components/CustomPageRoute.dart';
-import 'package:gamepower_wallet/common/components/PageBase.dart';
-import 'package:gamepower_wallet/common/constants/constants.dart';
-import 'package:gamepower_wallet/providers/collections_provider.dart';
-import 'package:gamepower_wallet/providers/network_provider.dart';
-import 'package:gamepower_wallet/state/app.dart';
+import 'package:lootbox_wallet/common/components/CollectionGridItem.dart';
+import 'package:lootbox_wallet/common/components/CustomPageRoute.dart';
+import 'package:lootbox_wallet/common/components/PageBase.dart';
+import 'package:lootbox_wallet/common/constants/constants.dart';
+import 'package:lootbox_wallet/providers/collections_provider.dart';
+import 'package:lootbox_wallet/providers/network_provider.dart';
+import 'package:lootbox_wallet/state/app.dart';
 import 'package:provider/provider.dart';
 import 'collectibles.page.dart';
 

@@ -15,7 +15,7 @@ window.addEventListener("flutterInAppWebViewPlatformReady", function(event) {
     /*window.flutter_inappwebview.callHandler('onChannelMessage', {channel: 'App', state: "ready"}).then(function(result) {
       send("done");
     });*/
-    let response = JSON.stringify({name: 'App', state: "ready"});
+    let response = JSON.stringify({name: 'App', state: "ready", messageType: "state"});
     send(response);
 });
 </script>
