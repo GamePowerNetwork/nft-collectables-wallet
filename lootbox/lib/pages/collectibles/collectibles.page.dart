@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gamepower_wallet/common/components/CollectibleGridItem.dart';
-import 'package:gamepower_wallet/common/components/PageBase.dart';
-import 'package:gamepower_wallet/common/models/Collectible.dart';
-import 'package:gamepower_wallet/common/models/Collection.dart';
-import 'package:gamepower_wallet/providers/collectibles_provider.dart';
-import 'package:gamepower_wallet/providers/network_provider.dart';
+import 'package:lootbox_wallet/common/components/CollectibleGridItem.dart';
+import 'package:lootbox_wallet/common/components/PageBase.dart';
+import 'package:lootbox_wallet/common/models/Collectible.dart';
+import 'package:lootbox_wallet/common/models/Collection.dart';
+import 'package:lootbox_wallet/providers/collectibles_provider.dart';
+import 'package:lootbox_wallet/providers/network_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:gamepower_wallet/common/constants/constants.dart';
+import 'package:lootbox_wallet/common/constants/constants.dart';
 
 class CollectiblesPage extends StatefulWidget {
   final CollectiblesPageArguments arguments;

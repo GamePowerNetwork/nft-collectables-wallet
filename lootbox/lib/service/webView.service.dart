@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:gamepower_wallet/data/model/channels/Channel.dart';
 import 'package:jaguar/jaguar.dart';
 import 'package:jaguar_flutter_asset/jaguar_flutter_asset.dart';
 
 class WebViewService {
   HeadlessInAppWebView? _web;
+  late LocalStorage storage;
   Map<String, List<Function>> channelSubscriptions = new Map<String, List<Function>>();
 
   Future<void> init() async {
@@ -17,7 +17,7 @@ class WebViewService {
         initialOptions:
             InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions()),
         onWebViewCreated: (controller) =>
-            _createChannelHandlers(),
+            _onWebviewCreated(),
         onConsoleMessage: (controller, consoleMessage) {
           print("WebService Debug: " + consoleMessage.message);
           final jsonDecoder = JsonDecoder();
@@ -57,8 +57,9 @@ class WebViewService {
     await server.serve(logRequests: false);
   }
 
-  void _createChannelHandlers() {
+  void _onWebviewCreated() {
     //_web?.webViewController.addJavaScriptHandler(handlerName: "onChannelMessage", callback: _onChannelMessage);
+    storage = LocalStorage(_web!.webViewController);
   }
 
   void _onChannelMessage(Map<String, dynamic> message) {
@@ -66,6 +67,18 @@ class WebViewService {
     callbacks.forEach((callback) {
       callback(message);
     });
+  }
+
+  Future<void> setLocalStorage(String key, dynamic value) async {
+    await storage.setItem(key: key, value: value);
+  }
+
+  Future getLocalStorage(String key) async {
+    return await storage.getItem(key: key);
+  }
+
+  Future<void> clearLocalStorage() async {
+    await storage.clear();
   }
 
   void request(Map<String, dynamic> json) {

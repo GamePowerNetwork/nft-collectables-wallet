@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gamepower_wallet/common/components/PageBase.dart';
-import 'package:gamepower_wallet/common/constants/constants.dart';
-import 'package:gamepower_wallet/state/app.dart';
+import 'package:lootbox_wallet/common/components/PageBase.dart';
+import 'package:lootbox_wallet/state/app.dart';
 import 'package:provider/provider.dart';
 
 class MarketPage extends StatefulWidget {
