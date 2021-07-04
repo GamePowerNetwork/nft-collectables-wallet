@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lootbox_wallet/state/app.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:lottie/lottie.dart';
 
 class OnBoardingPage extends StatefulWidget {
   @override
@@ -33,7 +34,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     const bodyStyle = TextStyle(fontSize: 19.0, color: Colors.black);
 
     const pageDecoration = const PageDecoration(
-      titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700, color: Colors.black),
+      titleTextStyle: TextStyle(
+          fontSize: 28.0, fontWeight: FontWeight.w700, color: Colors.black),
       bodyTextStyle: bodyStyle,
       descriptionPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       pageColor: Colors.white,
@@ -56,9 +58,18 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         width: double.infinity,
         height: 90,
         child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.deepPurple,
+            onPrimary: Colors.black,
+            minimumSize: Size(double.infinity, 60),
+          ),
           child: const Text(
             'Skip Intro',
-            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
           onPressed: () => _onIntroEnd(context),
         ),
@@ -66,29 +77,40 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       pages: [
         PageViewModel(
           title: "Digital Collectibles Made Easy",
-          body:
-              "Placeholder text.",
-          image: _buildImage('img1.jpg'),
+          body: "Placeholder text.",
+          image: Padding(
+            padding: const EdgeInsets.only(top: 80),
+            child: Lottie.asset('assets/animations/treasure.json'),
+          ),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Buy, Sell and Trade",
-          body:
-              "Placeholder text.",
-          image: Icon(Icons.shopping_basket_rounded, size: 200, color: Colors.deepOrange[500],),
+          body: "Placeholder text.",
+          image: Icon(
+            Icons.shopping_basket_rounded,
+            size: 200,
+            color: Colors.deepOrange[500],
+          ),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Discover Rare Collectibles",
-          body:
-              "Placeholder text.",
-          image: Icon(Icons.stars, size: 200, color: Colors.deepOrange[500],),
+          body: "Placeholder text.",
+          image: Padding(
+            padding: const EdgeInsets.only(top: 80),
+            child: Lottie.asset('assets/animations/gaming-community.json'),
+          ),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Collectibles in the Real World",
-          body: "View your collectibles in augmented reality. Take your rare finds everywhere you go",
-          image: _buildImage('img2.jpg'),
+          body:
+              "View your collectibles in augmented reality. Take your rare finds everywhere you go",
+          image: Padding(
+            padding: const EdgeInsets.only(top: 80),
+            child: Lottie.asset('assets/animations/virtual-reality.json'),
+          ),
           decoration: pageDecoration,
         ),
         PageViewModel(
@@ -97,7 +119,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               Text("Click on ", style: bodyStyle),
-              Icon(Icons.stars, color: Colors.deepOrange,),
+              Icon(
+                Icons.stars,
+                color: Colors.deepOrange,
+              ),
               Text(" to view loot drops!", style: bodyStyle),
             ],
           ),
@@ -107,7 +132,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             bodyAlignment: Alignment.bottomCenter,
             imageAlignment: Alignment.topCenter,
           ),
-          image: _buildImage('img1.jpg'),
+          image: Lottie.asset('assets/animations/blue-diamond.json'),
           reverse: true,
         ),
       ],
@@ -117,9 +142,16 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       skipFlex: 0,
       nextFlex: 0,
       //rtl: true, // Display as right-to-left
-      skip: const Text('Skip', style: TextStyle(color: Colors.white),),
-      next: const Icon(Icons.arrow_forward, color: Colors.white,),
-      done: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white)),
+      skip: const Text(
+        'Skip',
+        style: TextStyle(color: Colors.white),
+      ),
+      next: const Icon(
+        Icons.arrow_forward,
+        color: Colors.white,
+      ),
+      done: const Text('Done',
+          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white)),
       curve: Curves.fastLinearToSlowEaseIn,
       controlsMargin: const EdgeInsets.all(16),
       controlsPadding: kIsWeb
@@ -128,14 +160,14 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       dotsDecorator: const DotsDecorator(
         size: Size(10.0, 10.0),
         color: Colors.white,
-        activeColor: Colors.red,
+        activeColor: Colors.deepPurple,
         activeSize: Size(22.0, 10.0),
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),
       ),
       dotsContainerDecorator: const ShapeDecoration(
-        color: Colors.black87,
+        color: Colors.black45,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),

@@ -10,8 +10,8 @@ class KeyringChannel {
   @JsonKey(defaultValue: "")
   String method;
 
-  @JsonKey(toJson: toNull, includeIfNull: false)
-  String phrase = '';
+  @JsonKey(toJson: toNull, includeIfNull: false, defaultValue: "")
+  String phrase;
 
   KeyringChannel({
     required this.name,

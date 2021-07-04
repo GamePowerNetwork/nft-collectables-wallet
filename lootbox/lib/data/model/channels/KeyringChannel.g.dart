@@ -9,7 +9,7 @@ part of 'KeyringChannel.dart';
 KeyringChannel _$KeyringChannelFromJson(Map<String, dynamic> json) {
   return KeyringChannel(
     name: json['name'] as String,
-    phrase: json['phrase'] as String,
+    phrase: json['phrase'] as String? ?? '',
     method: json['method'] as String? ?? '',
   );
 }
