@@ -5,6 +5,7 @@ import 'package:lootbox_wallet/providers/collections_provider.dart';
 import 'package:lootbox_wallet/providers/network_provider.dart';
 import 'package:lootbox_wallet/state/app.dart';
 import 'package:lootbox_wallet/state/keyring.dart';
+import 'package:lootbox_wallet/state/phrase.dart';
 import 'package:provider/provider.dart';
 
 void main(){ 
@@ -18,7 +19,7 @@ void main(){
         ChangeNotifierProvider<Collections>(create: (_) => Collections()),
         ChangeNotifierProvider<Collectibles>(create: (_) => Collectibles()),
         Provider<AppState>(create: (_) => AppState()),
-        Provider<Keyring>(create: (_) => Keyring(),)
+        Provider<Keyring>(create: (_) => Keyring()),
       ],
       child: MyApp(),
     ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:lootbox_wallet/pages/auth/auth.page.dart';
 import 'package:lootbox_wallet/pages/onboarding/onboarding.page.dart';
 import 'package:lootbox_wallet/common/models/Collection.dart';
 import 'package:lootbox_wallet/common/models/Network.dart';
 import 'package:lootbox_wallet/data/model/channels/AppChannel.dart';
 import 'package:lootbox_wallet/pages/shell/components/TabView.dart';
-import 'package:lootbox_wallet/pages/wallet_setup/wallet_setup.page.dart';
 import 'package:lootbox_wallet/providers/collections_provider.dart';
 import 'package:lootbox_wallet/providers/network_provider.dart';
 import 'package:mobx/mobx.dart';
@@ -78,7 +78,7 @@ class ShellPageState extends State<ShellPage> {
         if(appState.isOnboarding == true)
           return OnBoardingPage();
 
-        return WalletSetup();
+        return AuthPage();
       }
     );
   }
