@@ -2,6 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lootbox_wallet/pages/shell/shell.page.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -44,6 +45,9 @@ class _LootBoxAppState extends State<LootBoxApp> {
           scaffoldBackgroundColor: Color(0xFFF3F5F7),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           floatingActionButtonTheme: FloatingActionButtonThemeData(),
+          textTheme: GoogleFonts.firaSansTextTheme(
+            Theme.of(context).textTheme,
+          ),
         ),
         navigatorObservers: [observer],
         initialRoute: '/',

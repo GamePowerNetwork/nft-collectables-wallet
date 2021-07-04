@@ -1,107 +1,133 @@
 import 'package:flutter/material.dart';
+import 'package:lootbox_wallet/common/components/CustomPageRoute.dart';
+import 'package:lootbox_wallet/pages/wallet_setup/recovery_phrase.page.dart';
 import 'package:lootbox_wallet/state/app.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flare_flutter/flare_actor.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class WalletSetup extends StatefulWidget {
-  WalletSetup({Key? key}) : super(key: key);
+class WalletSetupPage extends StatefulWidget {
+  WalletSetupPage({Key? key}) : super(key: key);
 
   @override
-  _WalletSetupState createState() => _WalletSetupState();
+  _WalletSetupPageState createState() => _WalletSetupPageState();
 }
 
-class _WalletSetupState extends State<WalletSetup> {
+class _WalletSetupPageState extends State<WalletSetupPage> {
+  bool agreeToSetup = false;
+
+  void _continue() {
+    Navigator.of(context).push(
+      CustomPageRoute(builder: (_) => RecoveryPhrasePage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     AppState appState = Provider.of<AppState>(context);
 
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.blueAccent,
+      backgroundColor: Colors.deepPurple[200],
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text("Sign In"),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.transparent,
         elevation: 0,
-        actions: <Widget>[
-          IconButton(onPressed: () {}, icon: Icon(Icons.help_outline_sharp))
-        ],
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Container(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
+      body: SizedBox(
+        height: size.height,
+        child: Stack(
+          children: [
+            FlareActor("assets/animations/login_screen_animation_top.flr", alignment:Alignment.topCenter, fit:BoxFit.contain, animation:"Flow"),
+            Padding(
+              padding: const EdgeInsets.all(30.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Spacer(
-                    flex: 3,
-                  ),
+                  SizedBox(height: 80,),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Hey There,\nLet\'s Get Started',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                      "Secure and Private",
+                      style: GoogleFonts.nunitoSans(
+                        textStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)
                       ),
                     ),
                   ),
-                  SizedBox(height: 8),
+                  SizedBox(height: 8,),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Login to your account to continue',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
+                      "With 'advanced user' mode, your crypto keys will never leave this device. However, be aware that if you lose your recovery phrase, there will be no way to recover your wallet.",
+                      style: GoogleFonts.nunitoSans(textStyle: TextStyle(fontSize: 16, color: Colors.white)),
                     ),
-                  ),
-                  SizedBox(
-                    height: 60,
-                  ),
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.black,
-                      onPrimary: Colors.white,
-                      minimumSize: Size(double.infinity, 60),
-                    ),
-                    label: Text("Sign In With Apple"),
-                    icon: FaIcon(FontAwesomeIcons.apple),
-                    onPressed: () => appState.signInWithApple(),
-                  ),
-                  SizedBox(
-                    height: 30.0,
-                  ),
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      onPrimary: Colors.black,
-                      minimumSize: Size(double.infinity, 60),
-                    ),
-                    label: Text("Sign In With Google"),
-                    icon: FaIcon(FontAwesomeIcons.google, color: Colors.red,),
-                    onPressed: () => appState.signInWithGoogle(),
-                  ),
-                  SizedBox(
-                    height: 60,
-                  ),
-                  RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(text: 'Advanced user? ', children: [
-                    TextSpan(
-                      text: 'Setup a non-custodial wallet',
-                      style: TextStyle(decoration: TextDecoration.underline),
-                    ),
-                  ])),
-                  Spacer(
-                    flex: 2,
-                  ),
+                  )
                 ],
               ),
             ),
-          ),
+            Container(
+              margin: EdgeInsets.only(top: size.height * 0.3),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24),
+                  topRight: Radius.circular(24),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Spacer(),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Prepare for backup!",
+                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+                      ),
+                    ),
+                    Text(
+                      "On the next screen you will be provided 12 words used to recover your wallet if lost.",
+                      textAlign: TextAlign.center,
+                    ),
+                    Spacer(flex: 4),
+                    Lottie.asset('assets/animations/warning.json'),
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: agreeToSetup, 
+                          onChanged: (bool? value) {
+                            setState(() {
+                              agreeToSetup = value!;
+                            });
+                          }
+                        ),
+                        Expanded(
+                          child: Text(
+                            "I unserstand that if I lose my recovery phrase, I will not be able to access my collectibles.",
+                            maxLines: 2,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 8,),
+                    ElevatedButton( 
+                      child: Text("Continue"),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.deepPurple[600],
+                        onPrimary: Colors.white,
+                        minimumSize: Size(double.infinity, 60),
+                      ),
+                      onPressed: agreeToSetup ? _continue : null,
+                    ),
+                    Spacer(),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
