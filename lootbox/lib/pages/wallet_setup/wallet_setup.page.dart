@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lootbox_wallet/common/components/CustomPageRoute.dart';
 import 'package:lootbox_wallet/pages/wallet_setup/recovery_phrase.page.dart';
-import 'package:lootbox_wallet/state/app.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,8 +23,6 @@ class _WalletSetupPageState extends State<WalletSetupPage> {
 
   @override
   Widget build(BuildContext context) {
-    AppState appState = Provider.of<AppState>(context);
-
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.deepPurple[200],

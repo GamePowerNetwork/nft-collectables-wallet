@@ -1,7 +1,9 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:lootbox_wallet/common/components/CustomPageRoute.dart';
 import 'package:lootbox_wallet/pages/wallet_setup/phrase.component.dart';
+import 'package:lootbox_wallet/pages/wallet_setup/setup_success.dart';
 import 'package:lootbox_wallet/state/keyring.dart';
 import 'package:lootbox_wallet/state/phrase.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +20,13 @@ class _VerifyPhrasePageState extends State<VerifyPhrasePage> {
   late PhraseState phraseState;
   bool phraseMatch = false;
   String verificationPhrase = '';
+
+  void _setupSuccessful(BuildContext context) {
+    Navigator.of(context).push(
+      CustomPageRoute(
+          builder: (_) => SetupSeccess()),
+    );
+  }
 
   Widget _buildPhraseSelection() {
     if (phraseState.hasError) {
@@ -81,9 +90,7 @@ class _VerifyPhrasePageState extends State<VerifyPhrasePage> {
                 onPrimary: Colors.white,
                 minimumSize: Size(double.infinity, 60),
               ),
-              onPressed: phraseState.isVerified ? () {
-
-              } : null,
+              onPressed: phraseState.isVerified ? () { _setupSuccessful(context); } : null,
             );
             }
           ),
