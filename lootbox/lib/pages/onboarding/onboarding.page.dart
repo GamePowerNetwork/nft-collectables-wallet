@@ -77,7 +77,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       pages: [
         PageViewModel(
           title: "Digital Collectibles Made Easy",
-          body: "Placeholder text.",
+          body: "Say goodbye to complicated crypto wallets. Manage, buy, sell, and trade gamified collectibles with ease using the LootBox NFT wallet. Access your NFTs anytime and even interact with NFTs via Augmented Reality.",
           image: Padding(
             padding: const EdgeInsets.only(top: 80),
             child: Lottie.asset('assets/animations/treasure.json'),
@@ -86,7 +86,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         ),
         PageViewModel(
           title: "Buy, Sell and Trade",
-          body: "Placeholder text.",
+          body: "Quickly and easily find NFTs to buy, sell, and trade with confidence.",
           image: Icon(
             Icons.shopping_basket_rounded,
             size: 200,
@@ -95,8 +95,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Discover Rare Collectibles",
-          body: "Placeholder text.",
+          title: "Discover Collectibles",
+          body: "Discover rare and unique collectibles for Gamers and Art enthusiasts, but hurry these will only be available for a limited time or while limited supplies last.",
           image: Padding(
             padding: const EdgeInsets.only(top: 80),
             child: Lottie.asset('assets/animations/gaming-community.json'),
@@ -106,7 +106,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         PageViewModel(
           title: "Collectibles in the Real World",
           body:
-              "View your collectibles in augmented reality. Take your rare finds everywhere you go",
+              "View your collectibles in augmented reality. Take your rare finds everywhere you go.",
           image: Padding(
             padding: const EdgeInsets.only(top: 80),
             child: Lottie.asset('assets/animations/virtual-reality.json'),
@@ -115,17 +115,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         ),
         PageViewModel(
           title: "Start Collecting!",
-          bodyWidget: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text("Click on ", style: bodyStyle),
-              Icon(
-                Icons.stars,
-                color: Colors.deepOrange,
-              ),
-              Text(" to view loot drops!", style: bodyStyle),
-            ],
-          ),
+          bodyWidget: Container(),
           decoration: pageDecoration.copyWith(
             bodyFlex: 2,
             imageFlex: 4,
