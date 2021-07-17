@@ -1,7 +1,7 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:lootbox_wallet/common/components/CustomPageRoute.dart';
+import 'package:lootbox_wallet/common/components/custom_page_route.dart';
 import 'package:lootbox_wallet/pages/wallet_setup/phrase.component.dart';
 import 'package:lootbox_wallet/pages/wallet_setup/setup_success.dart';
 import 'package:lootbox_wallet/state/keyring.dart';

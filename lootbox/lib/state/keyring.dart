@@ -1,6 +1,6 @@
 import 'package:lootbox_wallet/common/constants/constants.dart';
-import 'package:lootbox_wallet/data/model/channels/KeyringChannel.dart';
-import 'package:lootbox_wallet/service/webView.service.dart';
+import 'package:lootbox_wallet/data/model/channels/keyring_channel.dart';
+import 'package:lootbox_wallet/service/web_view.service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'keyring.g.dart';

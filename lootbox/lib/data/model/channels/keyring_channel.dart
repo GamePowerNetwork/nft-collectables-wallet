@@ -1,7 +1,7 @@
 import 'package:lootbox_wallet/common/constants/constants.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'KeyringChannel.g.dart';
+part 'keyring_channel.g.dart';
 
 @JsonSerializable()
 class KeyringChannel {

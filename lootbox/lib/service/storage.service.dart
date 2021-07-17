@@ -1,4 +1,4 @@
-import 'package:lootbox_wallet/service/webView.service.dart';
+import 'package:lootbox_wallet/service/web_view.service.dart';
 
 class StorageService {
   late WebViewService webViewService;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lootbox_wallet/common/components/CustomPageRoute.dart';
+import 'package:lootbox_wallet/common/components/custom_page_route.dart';
 import 'package:lootbox_wallet/pages/wallet_setup/recovery_phrase.page.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flare_flutter/flare_actor.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lootbox_wallet/common/components/CollectibleGridItem.dart';
-import 'package:lootbox_wallet/common/components/PageBase.dart';
-import 'package:lootbox_wallet/common/models/Collectible.dart';
-import 'package:lootbox_wallet/common/models/Collection.dart';
+import 'package:lootbox_wallet/common/components/collectible_grid_item.dart';
+import 'package:lootbox_wallet/common/components/page_base.dart';
+import 'package:lootbox_wallet/common/models/collectible.dart';
+import 'package:lootbox_wallet/common/models/collection.dart';
 import 'package:lootbox_wallet/providers/collectibles_provider.dart';
 import 'package:lootbox_wallet/providers/network_provider.dart';
 import 'package:provider/provider.dart';

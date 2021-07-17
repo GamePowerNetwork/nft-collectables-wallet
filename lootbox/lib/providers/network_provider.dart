@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lootbox_wallet/common/models/Network.dart';
+import 'package:lootbox_wallet/common/models/network.dart';
 
 class NetworkProvider extends ChangeNotifier {
   Network? _selected;

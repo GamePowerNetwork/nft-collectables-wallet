@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lootbox_wallet/common/constants/constants.dart';
-import 'package:lootbox_wallet/data/model/channels/AppChannel.dart';
+import 'package:lootbox_wallet/data/model/channels/app_channel.dart';
 import 'package:lootbox_wallet/service/auth.service.dart';
 import 'package:lootbox_wallet/service/storage.service.dart';
-import 'package:lootbox_wallet/service/webView.service.dart';
+import 'package:lootbox_wallet/service/web_view.service.dart';
 import 'package:mobx/mobx.dart';
 import 'package:firebase_core/firebase_core.dart';
 

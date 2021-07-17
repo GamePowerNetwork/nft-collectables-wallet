@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'AppChannel.g.dart';
+part 'app_channel.g.dart';
 
 enum AppCurrentState { 
   @JsonValue("initial") initial, 

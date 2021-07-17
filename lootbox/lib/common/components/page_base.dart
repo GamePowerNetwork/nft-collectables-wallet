@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lootbox_wallet/common/components/MainAppBar.dart';
+import 'package:lootbox_wallet/common/components/main_app_bar.dart';
 import 'package:lootbox_wallet/common/constants/constants.dart';
 
 class PageBase extends StatefulWidget {

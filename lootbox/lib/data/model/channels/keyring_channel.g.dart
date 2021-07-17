@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'KeyringChannel.dart';
+part of 'keyring_channel.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
