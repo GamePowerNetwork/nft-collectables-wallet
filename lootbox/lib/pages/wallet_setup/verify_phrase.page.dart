@@ -2,9 +2,12 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lootbox_wallet/pages/wallet_setup/phrase.component.dart';
+import 'package:lootbox_wallet/state/app.dart';
 import 'package:lootbox_wallet/state/keyring.dart';
 import 'package:lootbox_wallet/state/phrase.dart';
+import 'package:lootbox_wallet/state/wallet.dart';
 import 'package:provider/provider.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class VerifyPhrasePage extends StatefulWidget {
   VerifyPhrasePage({Key? key}) : super(key: key);
@@ -16,8 +19,18 @@ class VerifyPhrasePage extends StatefulWidget {
 class _VerifyPhrasePageState extends State<VerifyPhrasePage> {
   late Keyring keyring;
   late PhraseState phraseState;
+  late AppState appState;
+  late WalletState walletState;
   bool phraseMatch = false;
   String verificationPhrase = '';
+
+  void _setupSuccessful(BuildContext context) async {
+    context.loaderOverlay.show();
+    await walletState.registerWallet(phraseState.phrases);
+    await appState.signInUser();
+    context.loaderOverlay.hide();
+    Navigator.of(context).popUntil((route) => route.isFirst);
+  }
 
   Widget _buildPhraseSelection() {
     if (phraseState.hasError) {
@@ -81,9 +94,7 @@ class _VerifyPhrasePageState extends State<VerifyPhrasePage> {
                 onPrimary: Colors.white,
                 minimumSize: Size(double.infinity, 60),
               ),
-              onPressed: phraseState.isVerified ? () {
-
-              } : null,
+              onPressed: phraseState.isVerified ? () { _setupSuccessful(context); } : null,
             );
             }
           ),
@@ -94,8 +105,10 @@ class _VerifyPhrasePageState extends State<VerifyPhrasePage> {
 
   @override
   Widget build(BuildContext context) {
+    appState = Provider.of<AppState>(context);
     keyring = Provider.of<Keyring>(context);
     phraseState = Provider.of<PhraseState>(context);
+    walletState = Provider.of<WalletState>(context);
 
     Size size = MediaQuery.of(context).size;
 

@@ -1,21 +1,17 @@
-import 'package:lootbox_wallet/service/webView.service.dart';
+import 'package:get_it/get_it.dart';
+import 'package:lootbox_wallet/service/web_view.service.dart';
 
 class StorageService {
-  late WebViewService webViewService;
-
-  Future<void> init(WebViewService _webService) async {
-    webViewService = _webService;
-  }
 
   Future<void> setItem(String key, dynamic value) async {
-    await webViewService.setLocalStorage(key, value);
+    await GetIt.I<WebViewService>().setLocalStorage(key, value);
   }
 
   Future<dynamic> getItem(String key) async {
-    return await webViewService.getLocalStorage(key);
+    return await GetIt.I<WebViewService>().getLocalStorage(key);
   }
 
   Future<void> clear() async {
-    await webViewService.clearLocalStorage();
+    await GetIt.I<WebViewService>().clearLocalStorage();
   }
 }

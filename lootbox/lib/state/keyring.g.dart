@@ -9,13 +9,6 @@ part of 'keyring.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Keyring on KeyringBase, Store {
-  Computed<String>? _$phraseComputed;
-
-  @override
-  String get phrase => (_$phraseComputed ??=
-          Computed<String>(() => super.phrase, name: 'KeyringBase.phrase'))
-      .value;
-
   final _$channelAtom = Atom(name: 'KeyringBase.channel');
 
   @override
@@ -31,17 +24,26 @@ mixin _$Keyring on KeyringBase, Store {
     });
   }
 
-  final _$KeyringBaseActionController = ActionController(name: 'KeyringBase');
+  final _$phraseAtom = Atom(name: 'KeyringBase.phrase');
 
   @override
-  void requestPhrase() {
-    final _$actionInfo = _$KeyringBaseActionController.startAction(
-        name: 'KeyringBase.requestPhrase');
-    try {
-      return super.requestPhrase();
-    } finally {
-      _$KeyringBaseActionController.endAction(_$actionInfo);
-    }
+  String get phrase {
+    _$phraseAtom.reportRead();
+    return super.phrase;
+  }
+
+  @override
+  set phrase(String value) {
+    _$phraseAtom.reportWrite(value, super.phrase, () {
+      super.phrase = value;
+    });
+  }
+
+  final _$requestPhraseAsyncAction = AsyncAction('KeyringBase.requestPhrase');
+
+  @override
+  Future<void> requestPhrase() {
+    return _$requestPhraseAsyncAction.run(() => super.requestPhrase());
   }
 
   @override

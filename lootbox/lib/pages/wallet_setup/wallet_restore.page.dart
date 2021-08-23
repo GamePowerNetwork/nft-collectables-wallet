@@ -5,14 +5,14 @@ import 'package:lottie/lottie.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class WalletSetupPage extends StatefulWidget {
-  WalletSetupPage({Key? key}) : super(key: key);
+class WalletRestorePage extends StatefulWidget {
+  WalletRestorePage({Key? key}) : super(key: key);
 
   @override
-  _WalletSetupPageState createState() => _WalletSetupPageState();
+  _WalletRestorePageState createState() => _WalletRestorePageState();
 }
 
-class _WalletSetupPageState extends State<WalletSetupPage> {
+class _WalletRestorePageState extends State<WalletRestorePage> {
   bool agreeToSetup = false;
 
   void _continue() {
@@ -80,7 +80,7 @@ class _WalletSetupPageState extends State<WalletSetupPage> {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        "Prepare for backup!",
+                        "Restore your account.",
                         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
                       ),
                     ),

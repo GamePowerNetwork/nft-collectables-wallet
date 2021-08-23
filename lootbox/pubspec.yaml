@@ -60,6 +60,8 @@ dependencies:
   rive: ^0.7.22
   lottie: ^1.0.1
   clipboard: ^0.1.3
+  modal_bottom_sheet: ^2.0.0
+  get_it: ^7.2.0
 
 dev_dependencies:
   flutter_test:

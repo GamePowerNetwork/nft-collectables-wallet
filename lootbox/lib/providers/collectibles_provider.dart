@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lootbox_wallet/common/models/Collectible.dart';
+import 'package:lootbox_wallet/common/models/collectible.dart';
 
 class Collectibles extends ChangeNotifier {
   List<Collectible> _collectibles = [];

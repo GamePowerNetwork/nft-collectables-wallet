@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'AppChannel.dart';
+part of 'app_channel.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -9,7 +9,6 @@ part of 'AppChannel.dart';
 AppChannel _$AppChannelFromJson(Map<String, dynamic> json) {
   return AppChannel(
     name: json['name'] as String,
-    state: _$enumDecode(_$AppCurrentStateEnumMap, json['state']),
     messageType:
         _$enumDecode(_$AppChannelMessageTypeEnumMap, json['messageType']),
   );
@@ -18,7 +17,6 @@ AppChannel _$AppChannelFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$AppChannelToJson(AppChannel instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'state': _$AppCurrentStateEnumMap[instance.state],
       'messageType': _$AppChannelMessageTypeEnumMap[instance.messageType],
     };
 
@@ -47,12 +45,6 @@ K _$enumDecode<K, V>(
     },
   ).key;
 }
-
-const _$AppCurrentStateEnumMap = {
-  AppCurrentState.initial: 'initial',
-  AppCurrentState.loading: 'loading',
-  AppCurrentState.ready: 'ready',
-};
 
 const _$AppChannelMessageTypeEnumMap = {
   AppChannelMessageType.none: 'none',

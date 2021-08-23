@@ -1,14 +1,15 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:lootbox_wallet/common/constants/constants.dart';
-import 'package:lootbox_wallet/data/model/channels/AppChannel.dart';
+import 'package:lootbox_wallet/common/models/wallet_user.dart';
+import 'package:lootbox_wallet/data/model/channels/app_channel.dart';
 import 'package:lootbox_wallet/service/auth.service.dart';
+import 'package:lootbox_wallet/service/provider.service.dart';
 import 'package:lootbox_wallet/service/storage.service.dart';
-import 'package:lootbox_wallet/service/webView.service.dart';
+import 'package:lootbox_wallet/service/wallet.service.dart';
+import 'package:lootbox_wallet/service/web_view.service.dart';
 import 'package:mobx/mobx.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-import 'keyring.dart';
 
 part 'app.g.dart';
 
@@ -19,10 +20,13 @@ enum AppLoginState {
   loggedOut,
 }
 
+enum AppCurrentState {
+  initial,
+  loading,
+  ready,
+}
+
 abstract class _AppStateBase with Store {
-  final WebViewService _webViewService = WebViewService();
-  final StorageService _storageService = StorageService();
-  final AuthService _authService = AuthService();
 
   _AppStateBase();
 
@@ -33,68 +37,65 @@ abstract class _AppStateBase with Store {
   MaterialColor pageColor = Colors.red;
 
   @observable
-  bool isOnboarding = true;
+  bool isOnboarding = false;
 
   @observable
   bool hasWallet = false;
 
   @observable
-  User? user;
+  AppCurrentState state = AppCurrentState.initial;
+
+  @observable
+  WalletUser user = WalletUser();
 
   @computed
   AppLoginState get loginState {
-    if (user?.uid != null) {
-      print("LOGGED IN");
+    if (user.address != null) {
       return AppLoginState.loggedIn;
     }
 
-    print("LOGGED OUT");
     return AppLoginState.loggedOut;
   }
-
-  @computed
-  AppCurrentState get state => channel.state;
 
   void onChannelData(Map<String, dynamic> json) async {
     channel = AppChannel.fromJson(json);
 
-    if (channel.messageType == AppChannelMessageType.state) {
-      // Check onboarding
-      if (await _storageService.getItem("onboarding_complete") == null) {
-        isOnboarding = true;
-      } else {
-        isOnboarding = !await _storageService.getItem("onboarding_complete");
-      }
+    print("onChannelData");
 
-      // Check wallet
-      if (await _storageService.getItem("wallet") == null) {
-        hasWallet = false;
-      } else if (await _storageService.getItem("wallet") != null) {
-        hasWallet = true;
+    if (channel.messageType == AppChannelMessageType.state) {
+      // Ready State
+      if(json["state"] == "ready") {
+        // Check onboarding
+        if (await GetIt.I<StorageService>().getItem("onboarding_complete") == null) {
+          isOnboarding = true;
+        } else {
+          isOnboarding = !await GetIt.I<StorageService>().getItem("onboarding_complete");
+        }
+
+        // Check wallet account
+        user = await GetIt.I<WalletService>().getWalletUser();
+
+        // State is ready
+        state = AppCurrentState.ready;
       }
     }
   }
 
   @action
-  Future<void> initApp(Keyring keyring) async {
+  Future<void> initApp() async {
+    print("Initializing the App");
     // Firebase
     await Firebase.initializeApp();
 
+    // WebViewService
+    await GetIt.I<WebViewService>().init();
+
     // Start loading app
-    channel.state = AppCurrentState.loading;
-
-    // Load services
-    keyring.init(_webViewService);
-
-    // Init Storage Service
-    _storageService.init(_webViewService);
-
-    // Auth Service
-    _authService.init(_onAuthStateChange);
+    state = AppCurrentState.loading;
+    print("App State is now loading");
 
     // App WebView Channel
-    _webViewService.subscribeToChannel(channel.name, onChannelData);
-    await _webViewService.init();
+    GetIt.I<WebViewService>().subscribeToChannel(channel.name, onChannelData);
   }
 
   @action
@@ -104,7 +105,7 @@ abstract class _AppStateBase with Store {
 
   @action
   Future<void> completeOnboarding() async {
-    await _storageService.setItem("onboarding_complete", true);
+    await GetIt.I<StorageService>().setItem("onboarding_complete", true);
     isOnboarding = false;
   }
 
@@ -112,7 +113,7 @@ abstract class _AppStateBase with Store {
   @action
   Future<void> signInWithApple() async {
     try {
-      await _authService.signInWithApple();
+      await GetIt.I<AuthService>().signInWithApple();
     } catch (e) {
       print(e);
     }
@@ -121,7 +122,16 @@ abstract class _AppStateBase with Store {
   @action
   Future<void> signInWithGoogle() async {
     try {
-      await _authService.signInWithGoogle();
+      await GetIt.I<AuthService>().signInWithGoogle();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @action 
+  Future<void> signInUser() async {
+    try {
+      user = await GetIt.I<WalletService>().getWalletUser();
     } catch (e) {
       print(e);
     }
@@ -129,10 +139,11 @@ abstract class _AppStateBase with Store {
 
   @action
   Future<void> signOut() async {
-    await _authService.signOut();
+    await GetIt.I<AuthService>().signOut();
   }
 
-  void _onAuthStateChange(User? _user) {
-    user = _user;
+  @action 
+  Future<void> connect() async {
+    await GetIt.I<ProviderService>().connect();
   }
 }

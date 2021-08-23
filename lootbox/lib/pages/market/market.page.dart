@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lootbox_wallet/common/components/PageBase.dart';
+import 'package:lootbox_wallet/common/components/page_base.dart';
 import 'package:lootbox_wallet/state/app.dart';
 import 'package:provider/provider.dart';
 

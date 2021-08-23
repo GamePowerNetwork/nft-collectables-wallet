@@ -36,6 +36,9 @@ class WebViewService {
       );
 
       await _web?.run();
+
+      print("Loading API in webView Service");
+
       _web?.webViewController.loadUrl(
         urlRequest:
             URLRequest(url: Uri.parse("http://localhost:8080/api/")),
@@ -89,5 +92,9 @@ class WebViewService {
       api.request('${json['name']}', '${arguments}');
     """
     );
+  }
+
+  InAppWebViewController getController() {
+    return _web!.webViewController;
   }
 }

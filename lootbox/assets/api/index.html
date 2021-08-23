@@ -6,15 +6,12 @@
 </head>
 <body>
 <script type="module">
-import * as api from './api.js';
+import * as appApi from './api.js';
 
 window.send = console.log;
-window.api = api;
+window.appApi = appApi;
 
 window.addEventListener("flutterInAppWebViewPlatformReady", function(event) {
-    /*window.flutter_inappwebview.callHandler('onChannelMessage', {channel: 'App', state: "ready"}).then(function(result) {
-      send("done");
-    });*/
     let response = JSON.stringify({name: 'App', state: "ready", messageType: "state"});
     send(response);
 });

@@ -16,13 +16,6 @@ mixin _$AppState on _AppStateBase, Store {
       (_$loginStateComputed ??= Computed<AppLoginState>(() => super.loginState,
               name: '_AppStateBase.loginState'))
           .value;
-  Computed<AppCurrentState>? _$stateComputed;
-
-  @override
-  AppCurrentState get state =>
-      (_$stateComputed ??= Computed<AppCurrentState>(() => super.state,
-              name: '_AppStateBase.state'))
-          .value;
 
   final _$channelAtom = Atom(name: '_AppStateBase.channel');
 
@@ -84,16 +77,31 @@ mixin _$AppState on _AppStateBase, Store {
     });
   }
 
+  final _$stateAtom = Atom(name: '_AppStateBase.state');
+
+  @override
+  AppCurrentState get state {
+    _$stateAtom.reportRead();
+    return super.state;
+  }
+
+  @override
+  set state(AppCurrentState value) {
+    _$stateAtom.reportWrite(value, super.state, () {
+      super.state = value;
+    });
+  }
+
   final _$userAtom = Atom(name: '_AppStateBase.user');
 
   @override
-  User? get user {
+  WalletUser get user {
     _$userAtom.reportRead();
     return super.user;
   }
 
   @override
-  set user(User? value) {
+  set user(WalletUser value) {
     _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
     });
@@ -102,8 +110,8 @@ mixin _$AppState on _AppStateBase, Store {
   final _$initAppAsyncAction = AsyncAction('_AppStateBase.initApp');
 
   @override
-  Future<void> initApp(Keyring keyring) {
-    return _$initAppAsyncAction.run(() => super.initApp(keyring));
+  Future<void> initApp() {
+    return _$initAppAsyncAction.run(() => super.initApp());
   }
 
   final _$completeOnboardingAsyncAction =
@@ -131,11 +139,25 @@ mixin _$AppState on _AppStateBase, Store {
     return _$signInWithGoogleAsyncAction.run(() => super.signInWithGoogle());
   }
 
+  final _$signInUserAsyncAction = AsyncAction('_AppStateBase.signInUser');
+
+  @override
+  Future<void> signInUser() {
+    return _$signInUserAsyncAction.run(() => super.signInUser());
+  }
+
   final _$signOutAsyncAction = AsyncAction('_AppStateBase.signOut');
 
   @override
   Future<void> signOut() {
     return _$signOutAsyncAction.run(() => super.signOut());
+  }
+
+  final _$connectAsyncAction = AsyncAction('_AppStateBase.connect');
+
+  @override
+  Future<void> connect() {
+    return _$connectAsyncAction.run(() => super.connect());
   }
 
   final _$_AppStateBaseActionController =
@@ -159,9 +181,9 @@ channel: ${channel},
 pageColor: ${pageColor},
 isOnboarding: ${isOnboarding},
 hasWallet: ${hasWallet},
+state: ${state},
 user: ${user},
-loginState: ${loginState},
-state: ${state}
+loginState: ${loginState}
     ''';
   }
 }
