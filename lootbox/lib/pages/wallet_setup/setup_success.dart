@@ -1,3 +1,4 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class SetupSeccess extends StatefulWidget {
@@ -19,7 +20,11 @@ class _SetupSeccessState extends State<SetupSeccess> {
       ),
       body: Stack(
         children: [
-
+          FlareActor("assets/animations/login_screen_animation_top.flr",
+              alignment: Alignment.topCenter,
+              fit: BoxFit.contain,
+              color: Color(0x77000000),
+              animation: "Flow"),
         ],
       ),
     );

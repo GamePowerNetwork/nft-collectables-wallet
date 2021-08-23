@@ -2,12 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'app_channel.g.dart';
 
-enum AppCurrentState { 
-  @JsonValue("initial") initial, 
-  @JsonValue("loading") loading, 
-  @JsonValue("ready") ready 
-}
-
 @JsonKey(defaultValue: AppChannelMessageType.none)
 enum AppChannelMessageType { 
   @JsonValue("none") none,
@@ -17,12 +11,10 @@ enum AppChannelMessageType {
 @JsonSerializable()
 class AppChannel {
   final String name;
-  AppCurrentState state;
   AppChannelMessageType messageType;
 
   AppChannel({
     required this.name,
-    this.state = AppCurrentState.initial,
     this.messageType = AppChannelMessageType.none,
   });
 

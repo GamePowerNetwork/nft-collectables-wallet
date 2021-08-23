@@ -25,12 +25,12 @@ class _LootBoxAppState extends State<LootBoxApp> {
       useDefaultLoading: false,
       overlayWidget: Center(
         child: SpinKitCubeGrid(
-          color: Colors.red,
+          color: Colors.white,
           size: 70.0,
         ),
       ),
-      overlayColor: Colors.red,
-      overlayOpacity: 0.4,
+      overlayColor: Colors.purple,
+      overlayOpacity: 0.7,
       child: MaterialApp(
         title: 'LootBox Wallet',
         debugShowCheckedModeBanner: false,

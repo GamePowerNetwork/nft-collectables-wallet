@@ -2,10 +2,10 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:lootbox_wallet/common/components/custom_page_route.dart';
+import 'package:lootbox_wallet/pages/wallet_setup/wallet_restore.page.dart';
 import 'package:lootbox_wallet/pages/wallet_setup/wallet_setup.page.dart';
 import 'package:lootbox_wallet/state/app.dart';
 import 'package:provider/provider.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AuthPage extends StatefulWidget {
@@ -23,6 +23,12 @@ class _AuthPageState extends State<AuthPage> {
     setupWallet() {
       Navigator.of(context).push(
         CustomPageRoute(builder: (_) => WalletSetupPage()),
+      );
+    }
+
+    restoreWallet() {
+      Navigator.of(context).push(
+        CustomPageRoute(builder: (_) => WalletRestorePage()),
       );
     }
 
@@ -77,31 +83,26 @@ class _AuthPageState extends State<AuthPage> {
                         ),
                       ),
                       Spacer(flex: 3),
-                      ElevatedButton.icon(
+                      ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: Colors.black,
                           onPrimary: Colors.white,
                           minimumSize: Size(double.infinity, 60),
                         ),
-                        label: Text("Sign In With Apple"),
-                        icon: FaIcon(FontAwesomeIcons.apple),
-                        onPressed: () => appState.signInWithApple(),
+                        child: Text("Setup A New Wallet"),
+                        onPressed: () => setupWallet(),
                       ),
                       SizedBox(
                         height: 30.0,
                       ),
-                      ElevatedButton.icon(
+                      ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: Colors.white,
                           onPrimary: Colors.black,
                           minimumSize: Size(double.infinity, 60),
                         ),
-                        label: Text("Sign In With Google"),
-                        icon: FaIcon(
-                          FontAwesomeIcons.google,
-                          color: Colors.red,
-                        ),
-                        onPressed: () => appState.signInWithGoogle(),
+                        child: Text("Restore An Existing Wallet"),
+                        onPressed: () => restoreWallet(),
                       ),
                       SizedBox(
                         height: 70,
